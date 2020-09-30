@@ -250,6 +250,20 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
                 }
               </FormattedMessage>
             </div>
+
+            <div className="gx-form-group">
+            <Form.Item label={<IntlMessages id="columns.levels"/>}>
+                <Select
+                  mode="multiple"
+                  value={levels}
+                  style={{width: '100%'}}
+                  placeholder={<IntlMessages id="columns.levels"/>}
+                  onChange={handleChangeLevels}>
+                    {levelsState.map((level , index)=>  <Option key={index} value={level.id}>{level.name}</Option>)}
+                </Select>
+              </Form.Item>
+            </div>
+            
             <div className="gx-form-group">
             <Form.Item label={<IntlMessages id="columns.materials"/>}>
                  <Select
@@ -271,18 +285,6 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
                   placeholder={<IntlMessages id="columns.other"/>}
                   onChange={handleChangeOtherSubjects}>
                   {subjectsState.filter((subject) => subject.type === 'other').map((subject , index)=>  <Option key={index} value={subject.id}>{subject.name}</Option>)}
-                </Select>
-              </Form.Item>
-            </div>
-            <div className="gx-form-group">
-            <Form.Item label={<IntlMessages id="columns.levels"/>}>
-                <Select
-                  mode="multiple"
-                  value={levels}
-                  style={{width: '100%'}}
-                  placeholder={<IntlMessages id="columns.levels"/>}
-                  onChange={handleChangeLevels}>
-                    {levelsState.map((level , index)=>  <Option key={index} value={level.id}>{level.name}</Option>)}
                 </Select>
               </Form.Item>
             </div>

@@ -7,6 +7,8 @@ import AddLevel from "components/level/AddLevel";
 import EditLevel from "components/level/EditLevel";
 import { connect } from "react-redux";
 import { fetchLevels , CreateLevel , UpdateLevel , DeleteLevel } from "../../../appRedux/actions/Levels";
+import { fetchSubjects } from "../../../appRedux/actions/Subjects";
+
 import { FormattedMessage } from "react-intl";
 
 
@@ -16,7 +18,8 @@ class Levels extends React.Component {
     selectedRowKeys: [], // Check here to configure the CRM column
     loading: false,
     level:{
-      name:''
+      name:'',
+      subjects:[]
     },
     addLevelState:false,
     editLevelState:false,
@@ -24,6 +27,7 @@ class Levels extends React.Component {
     searchText: '',
     searchedColumn: ''
   };
+
 
   getColumnSearchProps = (dataIndex , handleSearch , handleReset) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -97,7 +101,9 @@ class Levels extends React.Component {
   };
   
   componentDidMount(){
-    this.props.fetchLevels()
+    this.props.fetchLevels().then(async()=>{
+       await this.props.fetchSubjects()
+    })
   }
 
   onToggleModal = (modal) => {
@@ -190,8 +196,8 @@ class Levels extends React.Component {
               {hasSelected ? `تم تحديد ${selectedRowKeys.length} عناصر` : ''}
             </span>
           </div>
-          <AddLevel open={this.state.addLevelState} onAddLevel={this.onAddLevel} onToggleModal={this.onToggleModal} />
-          <EditLevel open={this.state.editLevelState} level={level} onSaveLevel={this.onSaveLevel} onToggleModal={this.onToggleModal} />
+          <AddLevel open={this.state.addLevelState} onAddLevel={this.onAddLevel} subjects={this.props.subjects} onToggleModal={this.onToggleModal} />
+          <EditLevel open={this.state.editLevelState} level={level} onSaveLevel={this.onSaveLevel} subjects={this.props.subjects}  onToggleModal={this.onToggleModal} />
           <Table locale={{emptyText:'لا توجد أي بيانات'}} rowKey={record => record.id} dir="rtl" bordered={true} className="gx-table-responsive" rowSelection={rowSelection} columns={columns} dataSource={this.props.levels}/>
         </Card>
       </Col>
@@ -203,8 +209,9 @@ class Levels extends React.Component {
 function mapStateToProps(state) {
   return {
     levels: state.levels,
+    subjects: state.subjects,
   };
 }
 
-export default connect(mapStateToProps, { fetchLevels , CreateLevel , UpdateLevel , DeleteLevel })(Levels)
+export default connect(mapStateToProps, { fetchLevels , CreateLevel , UpdateLevel , DeleteLevel , fetchSubjects })(Levels)
 

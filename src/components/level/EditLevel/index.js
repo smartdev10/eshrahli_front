@@ -1,17 +1,28 @@
 import React , { useState , useEffect } from "react";
-import { Input, Modal } from "antd";
+import { Input, Modal , Select } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
 
-const EditLevel = ({ onSaveLevel, onToggleModal, open, level }) => {
+
+const Option = Select.Option;
+
+
+const EditLevel = ({ onSaveLevel, onToggleModal, open, level , subjects }) => {
   
     const [name, setName] = useState('')
+    const [subjectsState, setSubjects] = useState([])
+
+    const  handleChangeSubjects = (subjects) => {
+      setSubjects(subjects)
+     }
 
     useEffect(() => {
       if(Object.keys(level).length !== 0){
         console.log(level.name)
         setName(level.name)
+        let subjects = level.subjects.map((sub)=> sub.id)
+        setSubjects(subjects)
       }
     }, [level])
 
@@ -27,18 +38,21 @@ const EditLevel = ({ onSaveLevel, onToggleModal, open, level }) => {
           if (name === '')
             return;
           onToggleModal("editLevelState");
-          onSaveLevel({ id:level.id , name });
+          onSaveLevel({ id:level.id , name , subjects:subjectsState });
           setName(name)
+          setName(subjectsState)
         }}
         onCancel={()=> {
           onToggleModal('editLevelState')
           setName(level.name)
+          let subjects = level.subjects.map((sub)=> sub.id)
+          setSubjects(subjects)
         }}>
 
         <div  className="gx-modal-box-row">
           <div className="gx-modal-box-form-item">
             <div className="gx-form-group">
-            <FormattedMessage id="columns.name" defaultMessage="name">
+             <FormattedMessage id="columns.name" defaultMessage="name">
              {
                placeholder => (
               <Input
@@ -49,7 +63,17 @@ const EditLevel = ({ onSaveLevel, onToggleModal, open, level }) => {
                 margin="none"/>
                 )
               }
-           </FormattedMessage>
+             </FormattedMessage>
+            </div>
+            <div className="gx-form-group">
+                 <Select
+                  mode="multiple"
+                  value={subjectsState}
+                  style={{width: '100%'}}
+                  placeholder={<IntlMessages id="columns.materials"/>}
+                  onChange={handleChangeSubjects}>
+                  {subjects.filter((subject) => subject.type === 'main').map((subject , index)=>  <Option key={index} value={subject.id}>{subject.name}</Option>)}
+                </Select>
             </div>
           </div>
         </div>

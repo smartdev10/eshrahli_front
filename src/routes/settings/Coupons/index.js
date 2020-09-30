@@ -111,10 +111,14 @@ class Coupons extends React.Component {
     })
   };
 
-  onAddCoupon = async (data) => {
-    await this.props.CreateCoupon({data})
-    message.success('تمت العملية بنجاح')
-    await this.props.fetchCoupons()
+  onAddCoupon = (data) => {
+    this.props.CreateCoupon({data}).then(async()=>{
+      message.success('تمت العملية بنجاح')
+      await this.props.fetchCoupons()
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
   };
 
   onSaveCoupon = async (data) => {
