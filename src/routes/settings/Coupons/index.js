@@ -115,9 +115,14 @@ class Coupons extends React.Component {
     this.props.CreateCoupon({data}).then(async()=>{
       message.success('تمت العملية بنجاح')
       await this.props.fetchCoupons()
+      this.onToggleModal("addCouponState");
     })
-    .catch((err)=>{
-      console.log(err)
+    .catch((err)=> {
+      if(err.data.error === 'Duplicate Code'){
+        message.error('الرمز الذي تم إدخاله مكرر')
+      }else{
+        message.error('عطل أثناء الإضافة!')
+      }
     })
   };
 

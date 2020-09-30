@@ -32,6 +32,7 @@
   "columns.level": "المرحلة الدراسية",
   "columns.nstudents": "عدد الطلبة",
   "columns.details":"تفاصيل",
+  "columns.periode":"مدة الصلاحية",
   "columns.other":"أخرى",
   "columns.role":"الوظيفة",
   "columns.sessionDateTime":"موعد الحصة",

@@ -24,9 +24,6 @@ class AddCoupon extends React.Component {
     console.log(dates);
   }
 
- 
- 
-
   render() {
     const { onAddCoupon, onToggleModal, open } = this.props;
     const { name , code , discount , start , end , description } = this.state;
@@ -47,13 +44,12 @@ class AddCoupon extends React.Component {
             message.error('المرجو إدخال نسبة التخفيض')
             return;
           }
-          onToggleModal("addCouponState");
           onAddCoupon({ name , code , discount:parseFloat(discount) , start , end , description });
-          this.setState({ name: '' , code: '' , discount: '' , start: '' , end: '' , description:'' })
+          this.setState({ name: '' , code: '' , discount: '' , start: '', end: '', description:'' })
         }}
         onCancel={()=> {
           onToggleModal("addCouponState")
-          this.setState({ name: '' , code: '' , discount: '' , start: '' , end: '' , description:'' })
+          this.setState({ name: '' , code: '' , discount: '' , start: '', end: '', description:'' })
         }}>
 
         <div  className="gx-modal-box-row">
@@ -127,11 +123,11 @@ class AddCoupon extends React.Component {
             </div>
 
             <div className="gx-form-group">
-            <FormattedMessage id="columns.discount" defaultMessage="discount">
+            <FormattedMessage id="columns.periode" defaultMessage="periode">
              {
                placeholder => (
-                <Form.Item  label={<IntlMessages id="columns.discount"/>}>
-                <RangePicker className="gx-mb-3 gx-w-100" ranges={{Today: [moment(), moment()], 'This Month': [moment(), moment().endOf('month')]}} onChange={this.onChange} />
+                <Form.Item  label={<IntlMessages id="columns.periode"/>}>
+                  <RangePicker value={[start !== "" ? moment(start) : null,end !== "" ? moment(end) : null]} placeholder={placeholder}  className="gx-mb-3 gx-w-100"  onChange={this.onChange} />
                 </Form.Item>
                )
               }
