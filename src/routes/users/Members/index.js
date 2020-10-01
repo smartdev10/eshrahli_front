@@ -122,21 +122,31 @@ class Members extends React.Component {
   };
 
   onAddUser = async (data) => {
-    await this.props.CreateUser({data})
-    message.success('تمت العملية بنجاح')
-    const { token } = this.props.auth 
-    let decoded = null
-    console.log(token)
-    if(token !== null){
-      decoded = jwtDecode(token)
-    }
-    if(decoded){
-      await  this.props.fetchUsers({
-        filter : {id : decoded.userId}
-      })
-    }else{
-      await this.props.fetchUsers()
-    }
+    await this.props.CreateUser({data}).then(async()=>{
+      message.success('تمت العملية بنجاح')
+      const { token } = this.props.auth 
+      let decoded = null
+      if(token !== null){
+        decoded = jwtDecode(token)
+      }
+      if(decoded){
+        await  this.props.fetchUsers({
+          filter : {id : decoded.userId}
+        })
+      }else{
+        await this.props.fetchUsers()
+      }
+      this.onToggleModal("addUserState");
+    }).catch((err)=> {
+      if(err.data.error === 'duplicate username'){
+        message.error('اسم المستخدم الذي تم إدخاله مكرر')
+      }else if(err.data.error === 'duplicate phonenumber'){
+        message.error('الهاتف الذي تم استخدامه مكرر')
+      }else{
+        message.error('عطل أثناء الإضافة!')
+      }
+      this.onToggleModal("addUserState");
+    })
   };
 
   onSaveUser = async (data) => {
@@ -144,7 +154,6 @@ class Members extends React.Component {
     message.success('تمت العملية بنجاح')
     const { token } = this.props.auth 
     let decoded = null
-    console.log(token)
     if(token !== null){
       decoded = jwtDecode(token)
     }

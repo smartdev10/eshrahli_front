@@ -4,6 +4,8 @@ import { SaveFilled , UploadOutlined } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
+import { fetchManyLevel } from "../../../appRedux/actions/Levels";
+
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -46,20 +48,30 @@ class AddTeacher extends React.Component {
     personalcard:null,
     levels:[],
     subjects:[],
+    subjectsState:[],
     other_subjects : [],
     fileList:[],
     previewVisible: false,
     previewImage: '',
     previewTitle: '',
+    loading:false,
+    disabled:true
   }
 
-  handleChangeLevels = (levels) => {
-    console.log(levels)
-    this.setState({levels})
+  handleChangeLevels = async (ids) => {
+    this.setState({levels : ids , loading:true})
+    const levels = await this.props.fetchManyLevel({ids})
+    let subjects = []
+    subjects = subjects.concat(...levels.map((level)=> level.subjects))
+    if(subjects.length === 0){
+      this.setState({disabled : true , loading:false})
+    }else{
+      this.setState({loading:false , subjects , disabled:false})
+    }
   }
 
   handleChangeSubjects = (subjects) => {
-    this.setState({subjects})
+    this.setState({subjectsState:subjects})
   }
 
   handleChangeOtherSubjects = (other_subjects) => {
@@ -112,7 +124,7 @@ class AddTeacher extends React.Component {
 
   render() {
     const { onAddTeacher, onToggleModal, open } = this.props;
-    const { name , password , mobile, fileList , gender , bankiban , bankname , image , personalcard , certificate , nationality , city , qualification , levels , subjects , previewImage , previewTitle , previewVisible , other_subjects } = this.state;
+    const { subjectsState ,  name , password , mobile, fileList , gender , bankiban , bankname , image , personalcard , certificate , nationality , city , qualification , levels , subjects , previewImage , previewTitle , previewVisible , other_subjects , loading , disabled } = this.state;
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 },
@@ -136,13 +148,13 @@ class AddTeacher extends React.Component {
             return null
           }else{
               onToggleModal("addTeacherState");
-              onAddTeacher({  name , password , mobile , gender , bankiban , bankname , image , personalcard , certificate , nationality , city , qualification , levels , subjects , other_subjects });
-              this.setState({ name: '' , fileList:[] ,  password:'' , mobile : '' , gender:'' , bankiban:'' ,bankname:'' ,image:null, personalcard:null, certificate:null ,nationality:'', city:'' ,qualification:'', levels: [] , subjects : [] , other_subjects : [] })
+              onAddTeacher({  name , password , mobile , gender , bankiban , bankname , image , personalcard , certificate , nationality , city , qualification , levels , subjects:subjectsState , other_subjects });
+              this.setState({ loading:false, disabled:true, name: '' , fileList:[] ,  password:'' , mobile : '' , gender:'' , bankiban:'' ,bankname:'' ,image:null, personalcard:null, certificate:null ,nationality:'', city:'' ,qualification:'', levels: [] , subjects : [] , subjectsState:[] , other_subjects : [] })
           }
         }}
         onCancel={()=> {
           onToggleModal("addTeacherState")
-          this.setState({ name: '' , fileList:[] , password:'' , gender:'' , mobile : '' , bankiban:'' ,bankname:'' ,image:null, personalcard:null, certificate:null ,nationality:'', city:'' ,qualification:'', levels: [] , subjects : [] , other_subjects : [] })
+          this.setState({loading:false, disabled:true, name: '' , fileList:[] , password:'' , gender:'' , mobile : '' , bankiban:'' ,bankname:'' ,image:null, personalcard:null, certificate:null ,nationality:'', city:'' ,qualification:'', levels: [] , subjects : [] , subjectsState:[] , other_subjects : [] })
         }}>
 
         <div  className="gx-modal-box-row">
@@ -251,12 +263,14 @@ class AddTeacher extends React.Component {
             <div className="gx-form-group">
               <Form.Item label={<IntlMessages id="columns.materials"/>}>
                  <Select
+                  loading={loading}
+                  disabled={disabled}
                   mode="multiple"
-                  value={subjects}
+                  value={subjectsState}
                   style={{width: '100%'}}
                   placeholder={<IntlMessages id="columns.materials"/>}
                   onChange={this.handleChangeSubjects}>
-                  {this.props.subjects.filter((subject) => subject.type === 'main').map((subject , index)=>  <Option key={index} value={subject.id}>{subject.name}</Option>)}
+                  {subjects.filter((subject) => subject.type === 'main').map((subject , index)=>  <Option key={index} value={subject.id}>{subject.name}</Option>)}
                 </Select>
               </Form.Item>
             </div>
@@ -362,4 +376,4 @@ function mapStateToProps(state) {
     nationalities: state.nationalities,
   };
 }
-export default connect(mapStateToProps)(AddTeacher)
+export default connect(mapStateToProps , {fetchManyLevel})(AddTeacher)

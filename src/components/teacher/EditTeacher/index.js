@@ -3,7 +3,8 @@ import { Input, Modal , Upload , Select , Form , Radio , Button } from "antd";
 import { SaveFilled , UploadOutlined } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchManyLevel } from "../../../appRedux/actions/Levels";
 
 
 const Option = Select.Option;
@@ -23,9 +24,8 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
 
     const nationalities = useSelector(state => state.nationalities)
     const cities = useSelector(state => state.cities)
-    const subjectsState = useSelector(state => state.subjects)
     const levelsState = useSelector(state => state.levels)
-
+    const dispatch = useDispatch()
 
   
     const [name, setName] = useState('')
@@ -34,13 +34,16 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
     const [bankiban, setBankIban] = useState('')
     const [nationality, setNationality] = useState('')
     const [password, setPassword] = useState('')
-    const [subjects, setSubjects] = useState([])
+    const [subjectsData, setSubjects] = useState([])
+    const [subjectsState, setSubjectState] = useState([])
     const [other_subjects, setOther] = useState([])
     const [levels, setLevels] = useState([])
     const [city, setCity] = useState('')
     const [qualification, setQualification] = useState('')
     const [gender, setGender] = useState('')
     const [image , setImage] = useState(null)
+    const [loading , setLoading] = useState(false)
+    const [disabled , setDisabled] = useState(true)
     const [certificate , setCertificate] = useState(null)
     const [personalcard , setPersonalCard] = useState(null)
 
@@ -68,12 +71,31 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
         setSubjects(subjects)
         setOther(other_subjects)
         setLevels(levels)
+        dispatch(fetchManyLevel({ids:levels})).then((levels)=>{
+          let subjects = []
+          subjects = subjects.concat(...levels.map((level)=> level.subjects))
+          setSubjectState(subjects)
+          subjects = subjects.map((sub)=> sub.id)
+          setSubjects(subjects)
+        })
       }
-    }, [teacher])
+    }, [teacher, dispatch])
 
-    const handleChangeLevels = (levels) => {
-      console.log(levels)
-      setLevels(levels)
+    const handleChangeLevels = async (ids) => {
+      setLevels(ids)
+      setLoading(true)
+      const levels = await dispatch(fetchManyLevel({ids}))
+      let subjects = []
+      subjects = subjects.concat(...levels.map((level)=> level.subjects))
+      if(subjects.length === 0){
+        setLoading(false)
+        setDisabled(true)
+        setSubjects([])
+      }else{
+        setSubjectState(subjects)
+        setLoading(false)
+        setDisabled(false)
+      }
     }
   
     const  handleChangeSubjects = (subjects) => {
@@ -144,7 +166,7 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
           if (name === ''| mobile === '' | bankiban === ''  | bankname === '' | gender === '' | nationality === '' | city === '' | qualification === '')
             return;
           onToggleModal("editTeacherState");
-          onSaveTeacher({ id:teacher.id , name , mobile , password , bankiban , bankname , gender , image , certificate , personalcard , nationality , city , subjects , other_subjects, levels , qualification });
+          onSaveTeacher({ id:teacher.id , name , mobile , password , bankiban , bankname , gender , image , certificate , personalcard , nationality , city , subjects:subjectsData , other_subjects, levels , qualification });
           setPassword('')
         }}
         onCancel={()=> {
@@ -267,8 +289,10 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
             <div className="gx-form-group">
             <Form.Item label={<IntlMessages id="columns.materials"/>}>
                  <Select
+                  loading={loading}
+                  disabled={disabled}
                   mode="multiple"
-                  value={subjects}
+                  value={subjectsData}
                   style={{width: '100%'}}
                   placeholder={<IntlMessages id="columns.materials"/>}
                   onChange={handleChangeSubjects}>

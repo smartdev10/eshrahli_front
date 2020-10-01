@@ -42,6 +42,12 @@ export const fetchLevels = (params = {
 };
 
 
+export const fetchManyLevel = (params) => {
+  return dispatch => {
+    return dataProvider("GET_MANY", "levels/many", params)
+  };
+};
+
 export const fetchOneLevel = (params) => {
   return dispatch => {
     return dataProvider("GET_ONE", "levels", params)

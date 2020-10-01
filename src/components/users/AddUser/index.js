@@ -31,7 +31,6 @@ class AddUser extends React.Component {
         onOk={() => {
           if (name === '' || username === '' || mobile === '' || role === '' || password === '')
             return;
-          onToggleModal("addUserState");
           onAddUser({ name , username , mobile , role , password });
           this.setState({ name: '' , username: '' , mobile : '' ,  role : '' , password : '' })
         }}
