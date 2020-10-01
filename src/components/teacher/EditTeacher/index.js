@@ -43,7 +43,7 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
     const [gender, setGender] = useState('')
     const [image , setImage] = useState(null)
     const [loading , setLoading] = useState(false)
-    const [disabled , setDisabled] = useState(true)
+    const [disabled , setDisabled] = useState(false)
     const [certificate , setCertificate] = useState(null)
     const [personalcard , setPersonalCard] = useState(null)
 
@@ -76,7 +76,6 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
           subjects = subjects.concat(...levels.map((level)=> level.subjects))
           setSubjectState(subjects)
           subjects = subjects.map((sub)=> sub.id)
-          setSubjects(subjects)
         })
       }
     }, [teacher, dispatch])
