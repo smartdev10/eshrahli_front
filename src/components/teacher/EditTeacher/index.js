@@ -90,10 +90,22 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
         setLoading(false)
         setSubjects([])
       }else{
-        setSubjectState(subjects)
+        const distinctedSubjects = [];
+        const map = new Map();
+        for (const item of subjects) {
+            if(!map.has(item.id)){
+                map.set(item.id, true);    // set any value to Map
+                distinctedSubjects.push({
+                    id: item.id,
+                    name: item.name,
+                    type: item.type
+                });
+            }
+        }
+        setSubjectState(distinctedSubjects)
         let filteredSujects = subjects.filter((subj) => subjectsData.includes(subj.id))
         let originalSubjects = filteredSujects.map((sub) => sub.id)
-        setSubjects(originalSubjects)
+        setSubjects(Array.from(new Set(originalSubjects)))
         setLoading(false)
         setDisabled(false)
       }

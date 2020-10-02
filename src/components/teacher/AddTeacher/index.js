@@ -64,9 +64,23 @@ class AddTeacher extends React.Component {
     let subjects = []
     subjects = subjects.concat(...levels.map((level)=> level.subjects))
     if(subjects.length === 0){
-      this.setState({disabled : true , loading:false})
+      this.setState({disabled : true ,  subjectsState:[] , loading:false})
     }else{
-      this.setState({loading:false , subjects , disabled:false})
+      const distinctedSubjects = [];
+      const map = new Map();
+      for (const item of subjects) {
+          if(!map.has(item.id)){
+              map.set(item.id, true);    // set any value to Map
+              distinctedSubjects.push({
+                  id: item.id,
+                  name: item.name,
+                  type: item.type
+              });
+          }
+      }
+      let filteredSujects = subjects.filter((subj) => this.state.subjectsState.includes(subj.id))
+      let originalSubjects = filteredSujects.map((sub) => sub.id)
+      this.setState({loading:false , subjects:distinctedSubjects , subjectsState:Array.from(new Set(originalSubjects)) , disabled:false})
     }
   }
 
