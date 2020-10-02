@@ -88,10 +88,12 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
       subjects = subjects.concat(...levels.map((level)=> level.subjects))
       if(subjects.length === 0){
         setLoading(false)
-        setDisabled(true)
         setSubjects([])
       }else{
         setSubjectState(subjects)
+        let filteredSujects = subjects.filter((subj) => subjectsData.includes(subj.id))
+        let originalSubjects = filteredSujects.map((sub) => sub.id)
+        setSubjects(originalSubjects)
         setLoading(false)
         setDisabled(false)
       }
@@ -169,6 +171,7 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
           setPassword('')
         }}
         onCancel={()=> {
+          console.log("ok canceled")
           onToggleModal('editTeacherState')
           setName(teacher.name)
           setMobile(teacher.mobile)
@@ -184,6 +187,7 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
           let other_subjects = teacher.other_subjects.map((sub)=> sub.id)
           setOther(other_subjects)
           setSubjects(subjects)
+          setSubjectState(teacher.subjects)
           setLevels(levels)
           setFileList([])
         }}>
