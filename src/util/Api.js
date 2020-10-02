@@ -8,6 +8,13 @@ export const transport = axios.create({
   }
 });
 
+export function setTokenHeader(token) {
+    if (token) {
+        transport.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    } else {
+      delete transport.defaults.headers.common["Authorization"];
+    }
+}
 
 export function dataProvider(type , path , params) {
   let url ='';

@@ -43,7 +43,7 @@ const HorizontalNav = (props) => {
 
       <SubMenu icon={<NotificationOutlined />} popupClassName={"gx-menu-horizontal gx-submenu-popup-curve gx-inside-submenu-popup-curve"} key="requests"
               title={<IntlMessages id="sidebar.Requests"/>}>
-          <Menu.Item key="users/members">
+          <Menu.Item key="requests/index">
           <Link to="/requests/index"><i className="gx-ml-2 icon icon-alert"/>
             <IntlMessages id="sidebar.Requests"/></Link>
           </Menu.Item>
@@ -74,15 +74,19 @@ const HorizontalNav = (props) => {
       
       <SubMenu icon={<SettingFilled/>} popupClassName={"gx-menu-horizontal gx-submenu-popup-curve gx-inside-submenu-popup-curve"} key="settings" title={<IntlMessages id="sidebar.Settings"/>}>
        
-         <Menu.Item key="settings/subjects">
-          <Link to="/settings/subjects"><i className="gx-ml-2 icon icon-files"/>
-            <IntlMessages id="sidebar.Materials"/></Link>
-         </Menu.Item>
 
          <Menu.Item key="settings/levels">
           <Link to="/settings/levels"><i className="gx-ml-2 icon icon-graduation"/>
               <IntlMessages id="sidebar.Levels"/></Link>
          </Menu.Item>
+
+
+         <Menu.Item key="settings/subjects">
+          <Link to="/settings/subjects"><i className="gx-ml-2 icon icon-files"/>
+            <IntlMessages id="sidebar.Materials"/></Link>
+         </Menu.Item>
+
+       
 
          <Menu.Item key="settings/nationalities">
           <Link to="/settings/nationalities"><i className="gx-ml-2 icon icon-translation"/>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Modal , Select , Form } from "antd";
+import { Input, Modal , Select , Form ,message } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
@@ -29,10 +29,15 @@ class AddUser extends React.Component {
         toggle={onToggleModal} visible={open}
         closable={false}
         onOk={() => {
-          if (name === '' || username === '' || mobile === '' || role === '' || password === '')
-            return;
-          onAddUser({ name , username , mobile , role , password });
-          this.setState({ name: '' , username: '' , mobile : '' ,  role : '' , password : '' })
+          console.log(name,username,mobile,role,password)
+          if (name === '' || username === '' || mobile === '' || role === '' || password === ''){
+            message.error('المرجو إدخال المعلومات المطلوبة')
+          }else if(/^[+]\d{3}\d{9}$/.test(mobile)){
+            onAddUser({ name , username , mobile , role , password });
+            this.setState({ name: '' , username: '' , mobile : '' ,  role : '' , password : '' })
+          }else{
+            message.error('المرجو إدخال رقم هاتف بطريقة صحيحة')
+          }
         }}
         onCancel={()=> {
           onToggleModal("addUserState")

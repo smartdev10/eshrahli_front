@@ -123,7 +123,7 @@ export const userSignIn = ({username, password}) => {
     ).then(({data}) => {
       console.log("userSignIn: ", data);
       if (data.result) {
-        localStorage.setItem("token", JSON.stringify(data.token.access_token));
+        localStorage.setItem("token", data.token.access_token);
         transport.defaults.headers.common['Authorization'] = "Bearer " + data.token.access_token;
         dispatch({type: FETCH_SUCCESS});
         dispatch({type: USER_TOKEN_SET, payload: data.token.access_token});

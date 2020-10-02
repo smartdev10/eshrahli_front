@@ -2,8 +2,8 @@ import {INIT_URL, SIGNOUT_USER_SUCCESS, USER_DATA, USER_TOKEN_SET , VERIFY_TOKEN
 import jwtDecode from "jwt-decode";
 
 const INIT_STATE = {
-  token: JSON.parse(localStorage.getItem('token')),
-  token_verify: JSON.parse(localStorage.getItem('token_verify')),
+  token: localStorage.getItem('token'),
+  token_verify: localStorage.getItem('token_verify'),
   initURL: '',
   authUser: localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token')) : null,
   alertMessage: '',

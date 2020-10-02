@@ -167,9 +167,6 @@ class Members extends React.Component {
   };
 
  
- 
-  
-
   render() {
     const { selectedRowKeys  , user} = this.state;
     const rowSelection = {
@@ -215,7 +212,6 @@ class Members extends React.Component {
           .then(async()=> {
             const { token } = this.props.auth 
             let decoded = null
-            console.log(token)
             if(token !== null){
               decoded = jwtDecode(token)
             }
