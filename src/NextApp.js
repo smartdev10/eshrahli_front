@@ -14,7 +14,6 @@ const store = configureStore({});
 
 if (localStorage.token) {
   setTokenHeader(localStorage.token);
-  console.log(localStorage.getItem('token'))
   // prevent someone from manually tampering with the key of jwtToken in localStorage
   try {
     store.dispatch({type: USER_TOKEN_SET, payload: localStorage.token});

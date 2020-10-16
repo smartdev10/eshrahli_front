@@ -189,7 +189,7 @@ class Teachers extends React.Component {
   } 
 
   render() {
-    const { loading, selectedRowKeys , visible , teacher , loadingTable } = this.state;
+    const { loading, selectedRowKeys , visible , teacher , loadingTable , showTeacherState } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -277,7 +277,7 @@ class Teachers extends React.Component {
           </div>
           <AddTeacher open={this.state.addTeacherState} onAddTeacher={this.onAddTeacher} onToggleModal={this.onToggleModal} />
           <EditTeacher open={this.state.editTeacherState} teacher={teacher} onSaveTeacher={this.onSaveTeacher} onToggleModal={this.onToggleModal} />
-          <ShowTeacher open={this.state.showTeacherState} teacher={teacher} onToggleModal={this.onToggleModal} />
+          {showTeacherState && <ShowTeacher open={this.state.showTeacherState} teacher={teacher} onToggleModal={this.onToggleModal} />}
           <Table locale={{emptyText:'لا توجد أي بيانات'}} loading={loadingTable} rowKey={record => record.id}  bordered={true} className="gx-table-responsive" rowSelection={rowSelection} columns={columns} dataSource={this.props.teachers}/>
         </Card>
       </Col>
