@@ -25,6 +25,7 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
     const nationalities = useSelector(state => state.nationalities)
     const cities = useSelector(state => state.cities)
     const levelsState = useSelector(state => state.levels)
+    const globalSubjects = useSelector(state => state.subjects)
     const dispatch = useDispatch()
 
   
@@ -323,7 +324,7 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
                   style={{width: '100%'}}
                   placeholder={<IntlMessages id="columns.other"/>}
                   onChange={handleChangeOtherSubjects}>
-                  {subjectsState.filter((subject) => subject.type === 'other').map((subject , index)=>  <Option key={index} value={subject.id}>{subject.name}</Option>)}
+                  {globalSubjects.filter((subject) => subject.type === 'other').map((subject , index)=>  <Option key={index} value={subject.id}>{subject.name}</Option>)}
                 </Select>
               </Form.Item>
             </div>
