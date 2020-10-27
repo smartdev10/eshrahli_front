@@ -138,9 +138,11 @@ class Students extends React.Component {
     this.setState({ loading: true });
     this.props.DeleteStudents({ids})
     .then( async ()=>{
-      await this.props.fetchStudents()
-      message.success('تم حذف الطالب');
       this.setState({ loading: false , selectedRowKeys:[]});
+      message.success('تم حذف الطالب');
+      this.setState({ loadingTable: true });
+      await this.props.fetchStudents()
+      this.setState({ loadingTable: false });
     }).catch(()=>{
       message.error('عطل أثناء العملية');
       this.setState({ loading: false , selectedRowKeys:[]});
