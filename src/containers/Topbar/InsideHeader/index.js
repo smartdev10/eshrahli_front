@@ -6,7 +6,6 @@ import languageData from "../languageData";
 import UserInfo from "components/UserInfo";
 import HorizontalNav from "../HorizontalNav";
 import {switchLanguage, toggleCollapsedSideNav} from "appRedux/actions/Setting";
-
 const {Header} = Layout;
 
 
@@ -25,7 +24,7 @@ const InsideHeader = () => {
             dispatch(switchLanguage(language))
           }>
             {/* <i className={`flag flag-24 gx-ml-2 flag-${language.icon}`}/> */}
-            <img className="gx-ml-1" style={{width:'24px' , height:'24px'}} src={require("../../../assets/vendors/flag/saudi-arabia.svg")} alt=""/>
+            <img className="gx-ml-1" style={{width:'24px' , height:'24px'}} src="/saudi-arabia.svg" alt=""/>
             <span style={{textAlign:"center"}} className="gx-language-text gx-py-1">العربية</span>
           </li>
         )}
@@ -46,7 +45,7 @@ const InsideHeader = () => {
               <li className="gx-language">
                 <Popover overlayClassName="gx-popover-horizantal" placement='bottomLeft'  content={languageMenu()} trigger="click" >
                     <span className="gx-pointer">
-                      <img  style={{width:'24px' , height:'24px'}} src={require("assets/vendors/flag/saudi-arabia.svg")} alt=""/>  
+                      <img  style={{width:'24px' , height:'24px'}} src="/saudi-arabia.svg" alt=""/>  
                     </span>
                 </Popover>
               </li>
