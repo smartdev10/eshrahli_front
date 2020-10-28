@@ -134,16 +134,16 @@ class Requests extends React.Component {
       ),
      align:'right'
     },{
-      title: <IntlMessages id="columns.amount"/>,  dataIndex: '', key: 'x', render: ({amount}) => (
+      title: <IntlMessages id="columns.amount"/>,  dataIndex: '', key: 'x', render: ({total}) => (
         <span>
-          {amount ? amount : 'غير وارد' }
+          {total ? +'SR'+total : 'غير وارد' }
         </span>
       ),
      align:'right'
     },{
       title: <IntlMessages id="columns.status"/>,  dataIndex: '', key: 'x', render: ({status}) => (
         <span>
-          {status === 'pending' ? 'بالإنتظار' :  status === 'canceled' ? 'ألغيت' : '' }
+          {status === 'PENDING' ? 'بالإنتظار' :  status === 'CONFIRMED' ? 'مؤكدة' :  status === 'COMPLETED' ? 'منتهية' : 'غير وارد'}
         </span>
       ),
      align:'right'

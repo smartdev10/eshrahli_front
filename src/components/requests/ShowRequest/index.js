@@ -9,6 +9,10 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
     const [sname, setSname] = useState('')
     const [tname, setTname] = useState('')
     const [subject, setSubject] = useState('')
+    const [status, setStatus] = useState('')
+    const [startTime, setStartTime] = useState('')
+    const [endTime, setEndTime] = useState('')
+    const [duration, setDuration] = useState('')
     const [level, setLevel] = useState('')
     const [nstudents, setNumberStudent] = useState('')
     const [sessionDate, setSessionDate] = useState('')
@@ -34,10 +38,23 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
         setSessionDate(request.sessionDate)
         setSearchType(request.search_type)
         setDetails(request.details)
-       
-        const payementMethod = request.payementMethod ?  request.payementMethod :  'غير وارد'
-        setPaymendMethod(payementMethod)
-
+        setStatus(request.status)
+        setStartTime(request.lesson_start_time)
+        setEndTime(request.lesson_end_time)
+        if(startTime && endTime){
+          const m1 = moment(startTime);
+          const m2 = moment(endTime);
+          const duration = moment.duration(m1.diff(m2));
+          setDuration(duration)
+        }
+        switch(request.paymentMethod){
+          case "cash" :
+            setPaymendMethod('كاش')
+          case "credit_card" :
+            setPaymendMethod('بطاقة مصرفية')
+          default :
+            setPaymendMethod('غير وارد')
+        }
         const city = request.city ?  request.city.name :  'غير وارد'
         setCity(city)
        
@@ -125,6 +142,16 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
                     {city}
                   </Card>
               </Col>
+
+              {
+                status === "COMPLETED" ? (
+                  <Col xl={6} lg={12} md={12} sm={12} xs={12} className="gx-col-full">
+                    <Card style={{ marginTop: 16 }} type="inner"  title={<IntlMessages id="columns.city"/>}>
+                      {duration}
+                    </Card>
+                 </Col>
+                ) : null
+              }
 
               </Row>
 

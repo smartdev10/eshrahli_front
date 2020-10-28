@@ -27,7 +27,7 @@ export const UpdateTeacherStatus = (params) => {
 
 export const DeleteTeachers = (params) => {
   return dispatch => {
-    return dataProvider("DELETE_MANY", "teachers/delete", params)
+    return dataProvider("DELETE_MANY", "teachers/soft_delete", params)
   };
 };
 

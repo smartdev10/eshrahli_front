@@ -21,7 +21,7 @@ export const UpdateStudent = (params) => {
 
 export const DeleteStudents = (params) => {
   return dispatch => {
-    return dataProvider("DELETE_MANY", "students/delete", params)
+    return dataProvider("DELETE_MANY", "students/soft_delete", params)
   };
 };
 
