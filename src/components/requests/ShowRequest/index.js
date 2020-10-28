@@ -20,7 +20,7 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
     const [details, setDetails] = useState('')
     const [city, setCity] = useState('')
    
-    const [payementMethod, setPaymendMethod] = useState('')
+    const [paymentMethod, setPaymendMethod] = useState('')
    
     const [cancellationDate, setCancellationDate] = useState('')
     const [canceledBy, setCancelledBy] = useState('')
@@ -50,10 +50,13 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
         switch(request.paymentMethod){
           case "cash" :
             setPaymendMethod('كاش')
+            break;
           case "credit_card" :
             setPaymendMethod('بطاقة مصرفية')
+            break;
           default :
             setPaymendMethod('غير وارد')
+            break;
         }
         const city = request.city ?  request.city.name :  'غير وارد'
         setCity(city)
@@ -125,7 +128,7 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
 
               <Col xl={6} lg={12} md={12} sm={12} xs={12} className="gx-col-full">
                   <Card style={{ marginTop: 16 }} type="inner"  title={<IntlMessages id="columns.peymentMethod"/>}>
-                    {payementMethod}
+                    {paymentMethod}
                   </Card>
               </Col>
 
