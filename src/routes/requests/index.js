@@ -143,7 +143,7 @@ class Requests extends React.Component {
     },{
       title: <IntlMessages id="columns.status"/>,  dataIndex: '', key: 'x', render: ({status}) => (
         <span>
-          {status === 'PENDING' ? 'بالإنتظار' :  status === 'CONFIRMED' ? 'مؤكدة' :  status === 'COMPLETED' ? 'منتهية' : 'غير وارد'}
+          {status === 'PENDING' ? 'قيد الانتظار' :  status === 'CONFIRMED' ? 'مؤكدة' :  status === 'COMPLETED' ? 'منتهية' : 'غير وارد'}
         </span>
       ),
      align:'right'
