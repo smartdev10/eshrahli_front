@@ -2,7 +2,7 @@ import axios from 'axios';
 import { stringify } from 'query-string';
 
 export const transport = axios.create({
-  baseURL: "http://67.205.129.242:7000/api",
+  baseURL: "/api",
   headers: {
     'Content-Type': 'application/json',
   }

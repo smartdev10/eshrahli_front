@@ -65,7 +65,7 @@
     "url-search-params": "^1.1.0",
     "victory": "^35.3.1"
   },
-  "proxy": "http://67.205.129.242:7000",
+  "proxy": "http://localhost:7000",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
