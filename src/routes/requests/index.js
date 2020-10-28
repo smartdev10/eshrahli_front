@@ -110,7 +110,7 @@ class Requests extends React.Component {
   }
 
   render() {
-    const { loading, selectedRowKeys , request} = this.state;
+    const { loading, selectedRowKeys , request , onShowRequestState} = this.state;
    
     const hasSelected = selectedRowKeys.length > 0;
 
@@ -136,7 +136,7 @@ class Requests extends React.Component {
     },{
       title: <IntlMessages id="columns.amount"/>,  dataIndex: '', key: 'x', render: ({total}) => (
         <span>
-          {total ? +'SR'+total : 'غير وارد' }
+          {total ? total : 'غير وارد' }
         </span>
       ),
      align:'right'
@@ -162,10 +162,10 @@ class Requests extends React.Component {
         <Card title={<h1><IntlMessages id="sidebar.Requests"/></h1>}>
           <div className="gx-mb-3">
             <span style={{marginLeft: 8}}>
-              {hasSelected ? `تم تحديد ${selectedRowKeys.length} عناصر` : ''}
+              {hasSelected ? `تم تحديد ${selectedRowKeys.length.toString()} عناصر` : ''}
             </span>
           </div>
-          <ShowRequest open={this.state.onShowRequestState} request={request} onToggleModal={this.onToggleModal} />
+          {onShowRequestState && <ShowRequest open={onShowRequestState} request={request} onToggleModal={this.onToggleModal} />}
           <Table rowKey={record => record.id} locale={{emptyText:'لا توجد أي بيانات'}} loading={loading} dir="rtl" bordered={true} className="gx-table-responsive"  columns={columns} dataSource={this.props.requests}/>
         </Card>
       </Col>

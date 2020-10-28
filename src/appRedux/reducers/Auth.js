@@ -11,7 +11,7 @@ const INIT_STATE = {
   loader: false,
 };
 
-export default (state = INIT_STATE, action) => {
+ const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
 
 
@@ -66,3 +66,4 @@ export default (state = INIT_STATE, action) => {
       return state;
   }
 }
+export default reducer

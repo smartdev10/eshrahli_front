@@ -15,7 +15,7 @@ import Users from "./Users";
 import Nationalities from "./Nationalities";
 import {connectRouter} from 'connected-react-router'
 
-export default (history) => combineReducers({
+const rootReducer = (history) => combineReducers({
   router: connectRouter(history),
   settings: Settings,
   auth: Auth,
@@ -32,3 +32,4 @@ export default (history) => combineReducers({
   users:Users,
   requests:Requests
 });
+export default rootReducer

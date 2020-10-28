@@ -12,7 +12,7 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
     const [status, setStatus] = useState('')
     const [startTime, setStartTime] = useState('')
     const [endTime, setEndTime] = useState('')
-    const [duration, setDuration] = useState('')
+    const [duration, setDuration] = useState(0)
     const [level, setLevel] = useState('')
     const [nstudents, setNumberStudent] = useState('')
     const [sessionDate, setSessionDate] = useState('')
@@ -44,8 +44,7 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
         if(startTime && endTime){
           const m1 = moment(startTime);
           const m2 = moment(endTime);
-          const duration = moment.duration(m1.diff(m2));
-          setDuration(duration)
+          setDuration(m2.diff(m1,'minutes'))
         }
         switch(request.paymentMethod){
           case "cash" :
@@ -64,7 +63,7 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
         setCancellationDate(request.cancellationDate)
         setCancelledBy(request.canceledBy)
       }
-    }, [request])
+    }, [request, startTime,endTime])
 
     return (
       <Modal
@@ -149,8 +148,8 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
               {
                 status === "COMPLETED" ? (
                   <Col xl={6} lg={12} md={12} sm={12} xs={12} className="gx-col-full">
-                    <Card style={{ marginTop: 16 }} type="inner"  title={<IntlMessages id="columns.city"/>}>
-                      {duration}
+                    <Card style={{ marginTop: 16 }} type="inner"  title={<IntlMessages id="columns.sessionDuration"/>}>
+                      {duration + " دقيقة"}
                     </Card>
                  </Col>
                 ) : null
