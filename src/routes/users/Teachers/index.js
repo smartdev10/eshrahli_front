@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Card, Table , Col , Row, Divider , message , Popconfirm , Switch , Input , Space } from "antd";
 import IntlMessages from "util/IntlMessages";
 import Highlighter from 'react-highlight-words';
-import { SearchOutlined , PlusCircleFilled, DeleteOutlined , EditOutlined, EyeFilled , CheckCircleTwoTone , ExclamationCircleTwoTone} from "@ant-design/icons";
+import { DollarOutlined , SearchOutlined , PlusCircleFilled, DeleteOutlined , EditOutlined, EyeFilled , CheckCircleTwoTone , ExclamationCircleTwoTone} from "@ant-design/icons";
 import { connect } from "react-redux";
 import { fetchTeachers , CreateTeacher , UpdateTeacher, DeleteTeachers , UpdateTeacherStatus } from "../../../appRedux/actions/Teachers";
 import { fetchSubjects } from "../../../appRedux/actions/Subjects";
@@ -12,6 +12,7 @@ import { fetchNationalities } from "../../../appRedux/actions/Nationalities";
 import AddTeacher from "components/teacher/AddTeacher";
 import EditTeacher from "components/teacher/EditTeacher";
 import ShowTeacher from "components/teacher/ShowTeacher";
+import ShowTeachEarnings from "components/teacher/ShowTeachEarnings";
 
 class Teachers extends React.Component {
   state = {
@@ -22,6 +23,7 @@ class Teachers extends React.Component {
     addTeacherState:false,
     editTeacherState:false,
     showTeacherState:false,
+    showTeacherEarnState:false,
     visible: false,
     searchText: '',
     searchedColumn: ''
@@ -120,6 +122,13 @@ class Teachers extends React.Component {
     })
   };
 
+  onShowTeacherEarnings = (teacher) => {
+    this.setState({teacher}, ()=>{
+      this.onToggleModal("showTeacherEarnState");
+    })
+  };
+
+
   onAddTeacher = async (data) => {
     const formData = new FormData();
     for (const key of Object.keys(data)) {
@@ -189,7 +198,7 @@ class Teachers extends React.Component {
   } 
 
   render() {
-    const { loading, selectedRowKeys , visible , teacher , loadingTable , showTeacherState } = this.state;
+    const { loading, selectedRowKeys , visible , teacher , loadingTable , showTeacherState , showTeacherEarnState } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -255,6 +264,8 @@ class Teachers extends React.Component {
           <Button onClick={() => this.onEditTeacher(teacher)} dir="rtl" type="primary" icon={<EditOutlined />}> تعديل </Button>
           <Divider type="vertical"/>
           <Button onClick={() => this.onShowTeacher(teacher)}  dir="rtl" type="primary" icon={<EyeFilled />} > تفاصيل </Button>
+          <Divider type="vertical"/>
+          <Button onClick={() => this.onShowTeacherEarnings(teacher)}  dir="rtl" type="primary" icon={<DollarOutlined />} > الحصيلة </Button>
         </span>
       ),
      align:'right'
@@ -278,6 +289,7 @@ class Teachers extends React.Component {
           <AddTeacher open={this.state.addTeacherState} onAddTeacher={this.onAddTeacher} onToggleModal={this.onToggleModal} />
           <EditTeacher open={this.state.editTeacherState} teacher={teacher} onSaveTeacher={this.onSaveTeacher} onToggleModal={this.onToggleModal} />
           {showTeacherState && <ShowTeacher open={this.state.showTeacherState} teacher={teacher} onToggleModal={this.onToggleModal} />}
+          {showTeacherEarnState && <ShowTeachEarnings open={this.state.showTeacherEarnState} teacher={teacher} onToggleModal={this.onToggleModal} />}
           <Table locale={{emptyText:'لا توجد أي بيانات'}} loading={loadingTable} rowKey={record => record.id}  bordered={true} className="gx-table-responsive" rowSelection={rowSelection} columns={columns} dataSource={this.props.teachers}/>
         </Card>
       </Col>

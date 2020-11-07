@@ -23,6 +23,7 @@ export const LOAD_STUDENTS = "LOAD_STUDENTS"
 export const LOAD_TEACHERS = "LOAD_TEACHERS"
 export const LOAD_USERS = "LOAD_USERS"
 export const LOAD_REQUESTS = "LOAD_REQUESTS"
+export const LOAD_SETTINGS = "LOAD_SETTINGS"
 
 //Auth const
 export const SIGNIN_USER = 'SIGNIN_USER';

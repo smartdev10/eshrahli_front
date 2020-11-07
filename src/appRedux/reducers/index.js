@@ -7,6 +7,7 @@ import Teachers from "./Teachers";
 import Messages from "./Messages";
 import Pages from "./Pages";
 import Cities from "./Cities";
+import Setting from "./Setting";
 import Coupons from "./Coupons";
 import Requests from "./Requests";
 import Levels from "./Levels";
@@ -26,6 +27,7 @@ const rootReducer = (history) => combineReducers({
   pages: Pages,
   coupons: Coupons,
   cities: Cities,
+  app_settings: Setting,
   levels:Levels,
   subjects: Subjects,
   nationalities: Nationalities,

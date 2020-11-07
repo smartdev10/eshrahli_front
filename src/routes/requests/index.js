@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, Table , Col , Row , Input , Space } from "antd";
 import IntlMessages from "util/IntlMessages";
-import { EyeFilled , SearchOutlined } from "@ant-design/icons";
+import { EyeFilled , SearchOutlined , ExportOutlined } from "@ant-design/icons";
 import { fetchRequests } from "../../appRedux/actions/Requests";
 import ShowRequest from "components/requests/ShowRequest";
 import { connect } from "react-redux";
@@ -160,6 +160,7 @@ class Requests extends React.Component {
       <Row>
        <Col span={24}>
         <Card title={<h1><IntlMessages id="sidebar.Requests"/></h1>}>
+          <Button onClick={() => window.open('/export','_blank')} size="large" icon={<ExportOutlined />}  type="primary" >تصدير الطلبات</Button>
           <div className="gx-mb-3">
             <span style={{marginLeft: 8}}>
               {hasSelected ? `تم تحديد ${selectedRowKeys.length.toString()} عناصر` : ''}

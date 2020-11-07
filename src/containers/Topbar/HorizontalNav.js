@@ -103,6 +103,12 @@ const HorizontalNav = (props) => {
               <IntlMessages id="sidebar.Coupons"/></Link>
          </Menu.Item>
 
+         
+         <Menu.Item key="settings/general">
+          <Link to="/settings/general"><i className="gx-ml-2 icon  icon-extra-components"/>
+              <IntlMessages id="sidebar.General"/></Link>
+         </Menu.Item>
+
       </SubMenu>
     
     </Menu>
