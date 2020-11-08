@@ -2,15 +2,15 @@ import React , { useState , useEffect , useRef } from "react";
 import { Modal , Card , Table , Tag } from "antd";
 import IntlMessages from "util/IntlMessages";
 import { SyncOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import axios from 'axios'
 
 const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
   
   const [name, setName] = useState('')
   const [loading, setLoading] = useState(true)
-  const [stats, setStatsData] = useState([])
-  const settings = useSelector(state => state.app_settings)
+  // const [stats, setStatsData] = useState([])
+  // const settings = useSelector(state => state.app_settings)
   const isMounted = useRef(true);
     useEffect(() => {
       if(Object.keys(teacher).length !== 0){
@@ -19,7 +19,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
           setName(teacher.name)
           // setMobile(teacher.mobile)
           axios.get(`/api/teachers/${teacher.id}/earnings`).then(res => {
-            console.log(res)
+            setLoading(false)
           })
         }
       }

@@ -157,7 +157,7 @@ class Settings extends React.Component {
     },{
       title: <IntlMessages id="columns.operation"/>, dataIndex: '', key: 'x', render: (data) => (
         <span>
-          <Button onClick={() => this.onEditCity(data)}  type="primary" icon={<EditOutlined />} > تعديل </Button>
+          <Button onClick={() => this.onEditSetting(data)}  type="primary" icon={<EditOutlined />} > تعديل </Button>
         </span>
       ),
      align:'right'

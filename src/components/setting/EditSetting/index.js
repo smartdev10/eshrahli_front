@@ -1,5 +1,5 @@
 import React , { useState , useEffect } from "react";
-import { Input, Modal } from "antd";
+import { Input, message, Modal } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
@@ -7,7 +7,7 @@ import { FormattedMessage } from "react-intl";
 const EditSetting = ({ onSaveSetting, onToggleModal, open, setting }) => {
   
     const [name, setName] = useState('')
-    const [numberValue, setValue] = useState('')
+    const [numberValue, setValue] = useState(0)
 
     useEffect(() => {
       if(Object.keys(setting).length !== 0){
@@ -26,15 +26,21 @@ const EditSetting = ({ onSaveSetting, onToggleModal, open, setting }) => {
         visible={open}
         closable={false}
         onOk={() => {
-          if (name === '')
-            return;
-          onToggleModal("editSettingState");
-          onSaveSetting({ id:setting.id , name });
-          setName(name)
+          if (name === '' || numberValue === '' || numberValue === 0){
+            message.error('المرجو إدخال المعلومات المطلوبة')
+          }else if(Number.isNaN(parseFloat(numberValue))){
+            message.error('المرجو إدخال أرقام فقط')
+          }else{
+            onToggleModal("editSettingState");
+            onSaveSetting({ id:setting.id , name , numberValue:parseFloat(numberValue)});
+            setName(name)
+            setValue(numberValue)
+          }
         }}
         onCancel={()=> {
           onToggleModal('editSettingState')
           setName(setting.name)
+          setValue(setting.numberValue)
         }}>
 
         <div  className="gx-modal-box-row">
@@ -61,7 +67,9 @@ const EditSetting = ({ onSaveSetting, onToggleModal, open, setting }) => {
                   required
                   value={numberValue}
                   placeholder={placeholder}
-                  onChange={(event) => setValue(event.target.value)}
+                  onChange={(event) => {
+                    setValue(event.target.value)
+                  }}
                   margin="none"/>
                   )
                 }

@@ -42,7 +42,7 @@
   "columns.email":"البريد الإلكتروني",
   "columns.gender":"الجنس",
   "columns.sgender":"جنس الطالب",
-  "teacher.earnings":"حصيلة المدرس",
+  "teacher.earnings":"حصيلة المدرس (آخر أسبوعين)",
   "columns.tgender":"جنس المدرس",
   "level.addLevel":"إضافة مستوى",
   "level.saveLevel":"حفظ مستوى",
