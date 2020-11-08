@@ -19,6 +19,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
           setName(teacher.name)
           // setMobile(teacher.mobile)
           axios.get(`/api/teachers/${teacher.id}/earnings`).then(res => {
+            console.log(res)
             setLoading(false)
           })
         }
@@ -32,18 +33,17 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
     const columns = [
       {
         title: 'حاصل الجمع',
-        dataIndex: 'name',
+        dataIndex: 'total',
         render: text => <span>{text}</span>,
       },
       {
         title: 'الضريبة',
-        className: 'column-money',
-        dataIndex: 'money',
+        dataIndex: 'tax',
         align: 'right',
       },
       {
         title: 'نسبة التطبيق',
-        dataIndex: 'address',
+        dataIndex: 'app-comission',
       },
     ];
     
