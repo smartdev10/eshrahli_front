@@ -96,7 +96,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
                loading ? <SyncOutlined style={{fontSize:'50px'}} spin /> :
                (
                 <Table
-                title={() => 'عدد الطلبات المكتملة' + reqs }
+                title={() => ' عدد الطلبات المكتملة' + reqs }
                 columns={columns}
                 dataSource={stats}
                 pagination={false}
