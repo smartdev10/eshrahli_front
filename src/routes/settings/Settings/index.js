@@ -6,7 +6,7 @@ import Highlighter from 'react-highlight-words';
 import { SearchOutlined , EditOutlined } from "@ant-design/icons";
 import AddSetting from "components/setting/AddSetting";
 import EditSetting from "components/setting/EditSetting";
-import { fetchSettings , CreateSetting , UpdateSetting , DeleteSetting } from "../../../appRedux/actions/Settings";
+import { fetchSettings , CreateSetting , UpdateSetting , DeleteSetting , loadSettings } from "../../../appRedux/actions/Settings";
 import { FormattedMessage } from "react-intl";
 
 
@@ -94,7 +94,7 @@ class Settings extends React.Component {
   };
  
   componentDidMount(){
-    this.props.fetchSettings()
+    this.props.fetchSettings().then(res => this.props.loadSettings(res))
   }
 
   onToggleModal = (modal) => {
@@ -185,6 +185,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps,{ fetchSettings , CreateSetting , UpdateSetting , DeleteSetting } )(Settings)
+export default connect(mapStateToProps,{ loadSettings , fetchSettings , CreateSetting , UpdateSetting , DeleteSetting } )(Settings)
 
 
