@@ -1,5 +1,5 @@
 import { dataProvider } from 'util/Api'
-import { LOAD_SETTINGS , FETCH_ERROR } from "../../constants/ActionTypes";
+import { LOAD_SETTINGS } from "../../constants/ActionTypes";
 
 
 export const loadSettings = settings => ({

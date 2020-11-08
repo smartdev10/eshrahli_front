@@ -1,28 +1,46 @@
 import React , { useState , useEffect , useRef } from "react";
-import { Modal , Card , Table , Tag } from "antd";
+import { Modal , Card , Table } from "antd";
 import IntlMessages from "util/IntlMessages";
 import { SyncOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from 'axios'
+import { fetchSettings } from "../../../appRedux/actions/Settings";
 
 
 const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
   
   const [name, setName] = useState('')
+  const [reqs, setTotalReqs] = useState(0)
   const [loading, setLoading] = useState(true)
-  // const [stats, setStatsData] = useState([])
-  const settings = useSelector(state => state.app_settings)
+  const [tax, setTax] = useState(0)
+  const [appComission, setComission] = useState(0)
+  const [stats, setStatsData] = useState([])
+  const dispatch = useDispatch()
   const isMounted = useRef(true);
     useEffect(() => {
       if(Object.keys(teacher).length !== 0){
         if(isMounted.current){
           setName(teacher.name)
-          console.log(settings)
-          axios.get(`/api/teachers/${teacher.id}/earnings`).then(res => {
-            if(Array.isArray(res.data.requests) && res.data.requests.length !== 0){
-               
-            }
-            setLoading(false)
+          axios.get(`/api/teachers/${teacher.id}/earnings`).then(({data}) => {
+            dispatch(fetchSettings()).then(settings => {
+              setTax(settings.find(s => s.slug === 'tax'))
+              setComission(settings.find(s => s.slug === 'app-comission'))
+              if(Array.isArray(data.requests) && data.requests.length !== 0){
+                setTotalReqs(data.requests.length)
+                const statsData = data.requests.map(req => {
+                    return {
+                      total : req.total,
+                      tax : (req.total * tax) / 100,
+                      appComission : (req.total * appComission) / 100,
+                      grandTotal : req.total + ((req.total * tax) / 100) + ( (req.total * appComission) / 100)
+                    }
+                })
+                setStatsData(statsData)
+                setLoading(false)
+              }else{
+                setLoading(false)
+              }
+             })
           })
         }
       }
@@ -30,7 +48,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
       return ()=>{
         isMounted.current = false;
       }
-    }, [teacher,settings])
+    }, [teacher,dispatch , tax , appComission])
 
 
     const columns = [
@@ -46,11 +64,14 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
       },
       {
         title: 'نسبة التطبيق',
-        dataIndex: 'app-comission',
+        dataIndex: 'appComission',
+      },
+      {
+        title: 'القيمة الإجمالية',
+        dataIndex: 'grandTotal',
       },
     ];
     
-    const data = [];
 
     const gridStyle = {
       textAlign: 'center',
@@ -70,18 +91,19 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
 
         <div  className="gx-modal-box-row">
           <div className="gx-modal-box-form-item">
-          <Card style={gridStyle} dir="rtl" title={name}>
+          <Card style={gridStyle} dir="rtl" title={name} >
             {
                loading ? <SyncOutlined style={{fontSize:'50px'}} spin /> :
                (
                 <Table
+                title={() => 'عدد الطلبات ' + reqs }
                 columns={columns}
-                dataSource={data}
+                dataSource={stats}
                 pagination={false}
                 bordered
-                footer={() => <span>
-                القيمة الإجمالية : <Tag style={{fontSize:20 }} color='blue'><span style={{margin:10}}>0 (SR)</span></Tag>
-                </span>}
+                // footer={() => <span>
+                // القيمة الإجمالية : <Tag style={{fontSize:20 }} color='blue'><span style={{margin:10}}>{grandTotal} (SR)</span></Tag>
+                // </span>}
                 />
                )
             }
