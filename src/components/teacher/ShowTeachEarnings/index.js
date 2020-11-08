@@ -1,5 +1,5 @@
 import React , { useState , useEffect , useRef } from "react";
-import { Modal , Card , Table } from "antd";
+import { Modal , Card , Table , Tag } from "antd";
 import IntlMessages from "util/IntlMessages";
 import { SyncOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
@@ -96,7 +96,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
                loading ? <SyncOutlined style={{fontSize:'50px'}} spin /> :
                (
                 <Table
-                title={() => ' عدد الطلبات المكتملة' + reqs }
+                title={() =>  <span>عدد الطلبات المكتملة  <Tag style={{fontSize:20 }} color='green'> {reqs} </Tag> </span>}
                 columns={columns}
                 dataSource={stats}
                 pagination={false}
