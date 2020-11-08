@@ -31,14 +31,9 @@ export const fetchSettings = (params = {
   filter: {},
 }) => {
   return dispatch => {
-    return dataProvider("GET_LIST", "settings", params).then((res)=>{
-      dispatch(loadSettings(res))
-    }).catch(err => {
-      dispatch({type: FETCH_ERROR, payload: err.message});
-      console.log("Error****:", err.message);
-    });
-  };
-};
+    return dataProvider("GET_LIST", "settings", params)
+  }
+}
 
 
 export const fetchOneSetting = (params) => {

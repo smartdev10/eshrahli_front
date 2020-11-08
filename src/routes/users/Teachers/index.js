@@ -9,6 +9,7 @@ import { fetchSubjects } from "../../../appRedux/actions/Subjects";
 import { fetchLevels } from "../../../appRedux/actions/Levels";
 import { fetchCities } from "../../../appRedux/actions/Cities";
 import { fetchNationalities } from "../../../appRedux/actions/Nationalities";
+import { fetchSettings } from "../../../appRedux/actions/Settings";
 import AddTeacher from "components/teacher/AddTeacher";
 import EditTeacher from "components/teacher/EditTeacher";
 import ShowTeacher from "components/teacher/ShowTeacher";
@@ -123,6 +124,7 @@ class Teachers extends React.Component {
   };
 
   onShowTeacherEarnings = (teacher) => {
+    this.props.fetchSettings()
     this.setState({teacher}, ()=>{
       this.onToggleModal("showTeacherEarnState");
     })
@@ -198,7 +200,7 @@ class Teachers extends React.Component {
   } 
 
   render() {
-    const { loading, selectedRowKeys , visible , teacher , loadingTable , showTeacherState , showTeacherEarnState } = this.state;
+    const { loading, selectedRowKeys , visible , teacher , loadingTable , showTeacherState , showTeacherEarnState , editTeacherState } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -287,7 +289,7 @@ class Teachers extends React.Component {
             </span>
           </div>
           <AddTeacher open={this.state.addTeacherState} onAddTeacher={this.onAddTeacher} onToggleModal={this.onToggleModal} />
-          <EditTeacher open={this.state.editTeacherState} teacher={teacher} onSaveTeacher={this.onSaveTeacher} onToggleModal={this.onToggleModal} />
+          {editTeacherState && <EditTeacher open={this.state.editTeacherState} teacher={teacher} onSaveTeacher={this.onSaveTeacher} onToggleModal={this.onToggleModal} />}
           {showTeacherState && <ShowTeacher open={this.state.showTeacherState} teacher={teacher} onToggleModal={this.onToggleModal} />}
           {showTeacherEarnState && <ShowTeachEarnings open={this.state.showTeacherEarnState} teacher={teacher} onToggleModal={this.onToggleModal} />}
           <Table locale={{emptyText:'لا توجد أي بيانات'}} loading={loadingTable} rowKey={record => record.id}  bordered={true} className="gx-table-responsive" rowSelection={rowSelection} columns={columns} dataSource={this.props.teachers}/>
@@ -303,4 +305,4 @@ function mapStateToProps(state) {
     teachers: state.teachers,
   };
 }
-export default connect(mapStateToProps, { UpdateTeacherStatus, fetchTeachers , CreateTeacher , UpdateTeacher, DeleteTeachers , fetchCities , fetchLevels , fetchSubjects , fetchNationalities })(Teachers)
+export default connect(mapStateToProps, { fetchSettings , UpdateTeacherStatus, fetchTeachers , CreateTeacher , UpdateTeacher, DeleteTeachers , fetchCities , fetchLevels , fetchSubjects , fetchNationalities })(Teachers)

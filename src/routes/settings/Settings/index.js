@@ -22,7 +22,7 @@ class Settings extends React.Component {
     searchedColumn: ''
   };
 
-  getColumnSearchProps = (dataIndex , handleSearch , handleReset) => ({
+  getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
       <FormattedMessage id="columns.name" defaultMessage="name">
@@ -35,7 +35,7 @@ class Settings extends React.Component {
             placeholder={`ابحث`}
             value={selectedKeys[0]}
             onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-            onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
             style={{ width: 188, marginBottom: 8, display: 'block' }}
           />
           )
@@ -44,14 +44,14 @@ class Settings extends React.Component {
         <Space>
           <Button
             type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
             size="small"
             style={{ width: 90 }}
           >
             ابحث
           </Button>
-          <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
             إلغاء
           </Button>
         </Space>

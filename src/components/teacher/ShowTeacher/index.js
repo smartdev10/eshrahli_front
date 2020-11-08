@@ -5,7 +5,7 @@ import IntlMessages from "util/IntlMessages";
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
 const ShowTeacher = ({ onToggleModal, open, teacher }) => {
-  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+  pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
   
   const [name, setName] = useState('')
   const [mobile, setMobile] = useState('')
@@ -55,6 +55,7 @@ const ShowTeacher = ({ onToggleModal, open, teacher }) => {
       setNumPages(numPages);
     }
   
+    
     function changePage(offset) { 
       setPageNumber(prevPageNumber => prevPageNumber + offset); 
     } 
@@ -154,6 +155,7 @@ const ShowTeacher = ({ onToggleModal, open, teacher }) => {
                             file={{
                               url:`/teachers/${personalCard}`
                             }}
+                            onLoadError={console.error}
                             onLoadSuccess={onDocumentLoadSuccess}>
                             <Page pageNumber={pageNumber} />
                         </Document>
@@ -200,6 +202,7 @@ const ShowTeacher = ({ onToggleModal, open, teacher }) => {
                             file={{
                               url:`/teachers/${certificate}`
                             }}
+                            onLoadError={console.error}
                             onLoadSuccess={onDocumentLoadSuccess}>
                             <Page pageNumber={pageNumber} />
                         </Document>

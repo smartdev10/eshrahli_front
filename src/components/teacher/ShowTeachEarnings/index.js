@@ -2,24 +2,26 @@ import React , { useState , useEffect , useRef } from "react";
 import { Modal , Card , Table , Tag } from "antd";
 import IntlMessages from "util/IntlMessages";
 import { SyncOutlined } from "@ant-design/icons";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from 'axios'
+
 
 const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
   
   const [name, setName] = useState('')
   const [loading, setLoading] = useState(true)
   // const [stats, setStatsData] = useState([])
-  // const settings = useSelector(state => state.app_settings)
+  const settings = useSelector(state => state.app_settings)
   const isMounted = useRef(true);
     useEffect(() => {
       if(Object.keys(teacher).length !== 0){
-        console.log(teacher)
         if(isMounted.current){
           setName(teacher.name)
-          // setMobile(teacher.mobile)
+          console.log(settings)
           axios.get(`/api/teachers/${teacher.id}/earnings`).then(res => {
-            console.log(res)
+            if(Array.isArray(res.data.requests) && res.data.requests.length !== 0){
+               
+            }
             setLoading(false)
           })
         }
@@ -28,7 +30,8 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
       return ()=>{
         isMounted.current = false;
       }
-    }, [teacher])
+    }, [teacher,settings])
+
 
     const columns = [
       {
@@ -47,26 +50,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
       },
     ];
     
-    const data = [
-      {
-        key: '1',
-        name: 'John Brown',
-        money: '￥300,000.00',
-        address: 'New York No. 1 Lake Park',
-      },
-      {
-        key: '2',
-        name: 'Jim Green',
-        money: '￥1,256,000.00',
-        address: 'London No. 1 Lake Park',
-      },
-      {
-        key: '3',
-        name: 'Joe Black',
-        money: '￥120,000.00',
-        address: 'Sidney No. 1 Lake Park',
-      },
-    ];
+    const data = [];
 
     const gridStyle = {
       textAlign: 'center',
@@ -96,7 +80,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
                 pagination={false}
                 bordered
                 footer={() => <span>
-                القيمة الإجمالية : <Tag style={{fontSize:20}} color='blue'>15645</Tag>
+                القيمة الإجمالية : <Tag style={{fontSize:20 }} color='blue'><span style={{margin:10}}>0 (SR)</span></Tag>
                 </span>}
                 />
                )
