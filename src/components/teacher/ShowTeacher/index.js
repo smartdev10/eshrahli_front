@@ -13,6 +13,7 @@ const ShowTeacher = ({ onToggleModal, open, teacher }) => {
   const [bankiban, setBankIban] = useState('')
   const [nationality, setNationality] = useState('')
   const [subjectsState, setSubjects] = useState([])
+  const [otherSubjectsState, setOtherSubjects] = useState([])
   const [levelsState, setLevels] = useState([])
   const [city, setCity] = useState('')
   const [qualification, setQualification] = useState('')
@@ -39,7 +40,9 @@ const ShowTeacher = ({ onToggleModal, open, teacher }) => {
           setCertificate(teacher.certificate)
           setPersonalCard(teacher.personalcard)
           let subjects = teacher.subjects.map((sub)=> sub.name)
+          let other_subjects = teacher.other_subjects.map((sub)=> sub.name)
           let levels = teacher.levels.map((lev)=> lev.name)
+          setOtherSubjects(other_subjects)
           setSubjects(subjects)
           setLevels(levels)
         }
@@ -125,14 +128,25 @@ const ShowTeacher = ({ onToggleModal, open, teacher }) => {
               </Row>
 
               <Row>
-              <Col xl={12} lg={12} md={12} sm={12} xs={12} className="gx-col-full">
+              <Col xl={24} lg={24} md={24} sm={24} xs={24} className="gx-col-full">
               <Card style={{ marginTop: 16 }} type="inner"title={<IntlMessages id="columns.levels"/>}>
               {levelsState.map((lev,index)=>  <Tag key={index} color="blue">{lev}</Tag>)}
               </Card>
               </Col>
-              <Col xl={12} lg={12} md={12} sm={12} xs={12} className="gx-col-full">
+              </Row>
+
+              <Row>
+              <Col xl={24} lg={24} md={24} sm={24} xs={24} className="gx-col-full">
               <Card style={{ marginTop: 16 }} type="inner"title={<IntlMessages id="columns.materials"/>}>
               {subjectsState.map((sub , index)=>  <Tag key={index}  color="blue">{sub}</Tag>)}
+              </Card>
+              </Col>
+              </Row>
+
+              <Row>
+              <Col xl={24} lg={24} md={24} sm={24} xs={24} className="gx-col-full">
+              <Card style={{ marginTop: 16 }} type="inner"title={<IntlMessages id="columns.other_materials"/>}>
+              {otherSubjectsState.map((sub , index)=>  <Tag key={index}  color="blue">{sub}</Tag>)}
               </Card>
               </Col>
               </Row>

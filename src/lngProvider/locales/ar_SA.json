@@ -10,6 +10,7 @@
   "columns.qualification": "المؤهلات",
   "columns.levels": " المستويات",
   "columns.materials": "المواد",
+  "columns.other_materials":"مواد أخرى",
   "columns.code": "الرمز",
   "columns.sessionDuration": "مدة الحصة",
   "columns.studentName": "اسم الطالب",
