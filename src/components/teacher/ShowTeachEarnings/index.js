@@ -29,7 +29,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
                   const statsData = data.requests.map((req,i) => {
                     return {
                       i,
-                      total : req.total,
+                      total :  req.total,
                       tax : req.total * taxx.numberValue * 0.01,
                       appComission : req.total * appCom.numberValue * 0.01,
                       grandTotal : req.total + (req.total * taxx.numberValue) * 0.01 + (req.total * appCom.numberValue) * 0.01
@@ -54,21 +54,21 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
 
     const columns = [
       {
-        title: 'حاصل الجمع',
+        title: 'حاصل الجمع (SR)',
         dataIndex: 'total',
         render: text => <span>{text}</span>,
       },
       {
-        title: 'الضريبة',
+        title: 'الضريبة (SR)',
         dataIndex: 'tax',
         align: 'right',
       },
       {
-        title: 'نسبة التطبيق',
+        title: 'نسبة التطبيق (SR)',
         dataIndex: 'appComission',
       },
       {
-        title: 'القيمة الإجمالية',
+        title: 'القيمة الإجمالية (SR)',
         dataIndex: 'grandTotal',
       },
     ];
@@ -97,7 +97,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
                loading ? <SyncOutlined style={{fontSize:'50px'}} spin /> :
                (
                 <Table
-                title={() =>  <span>عدد الطلبات المكتملة  <Tag style={{fontSize:20 }} color='green'> {reqs} </Tag> </span>}
+                title={() =>  <span style={{ textAlign:"center" }}>عدد الطلبات المكتملة : <Tag style={{fontSize:20 , paddingTop:8}} color='green'> {reqs} </Tag> </span>}
                 columns={columns}
                 dataSource={stats}
                 pagination={false}
