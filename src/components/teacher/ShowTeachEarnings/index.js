@@ -12,8 +12,6 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
   const [name, setName] = useState('')
   const [reqs, setTotalReqs] = useState(0)
   const [loading, setLoading] = useState(true)
-  const [tax, setTax] = useState(0)
-  const [appComission, setComission] = useState(0)
   const [stats, setStatsData] = useState([])
   const dispatch = useDispatch()
   const isMounted = useRef(true);
@@ -23,19 +21,22 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
           setName(teacher.name)
           axios.get(`/api/teachers/${teacher.id}/earnings`).then(({data}) => {
             dispatch(fetchSettings()).then(settings => {
-              setTax(settings.find(s => s.slug === 'tax'))
-              setComission(settings.find(s => s.slug === 'app-comission'))
               if(Array.isArray(data.requests) && data.requests.length !== 0){
+                const taxx = settings.find(s => s.slug === 'tax')
+                const appCom = settings.find(s => s.slug === 'app-comission')
                 setTotalReqs(data.requests.length)
-                const statsData = data.requests.map(req => {
+                if(appCom && taxx){
+                  const statsData = data.requests.map((req,i) => {
                     return {
+                      i,
                       total : req.total,
-                      tax : (req.total * tax) / 100,
-                      appComission : (req.total * appComission) / 100,
-                      grandTotal : req.total + ((req.total * tax) / 100) + ( (req.total * appComission) / 100)
+                      tax : req.total * taxx.numberValue * 0.01,
+                      appComission : req.total * appCom.numberValue * 0.01,
+                      grandTotal : req.total + (req.total * taxx.numberValue) * 0.01 + (req.total * appCom.numberValue) * 0.01
                     }
-                })
-                setStatsData(statsData)
+                  })
+                  setStatsData(statsData)
+                }
                 setLoading(false)
               }else{
                 setLoading(false)
@@ -48,7 +49,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
       return ()=>{
         isMounted.current = false;
       }
-    }, [teacher,dispatch , tax , appComission])
+    }, [teacher,dispatch])
 
 
     const columns = [
@@ -101,6 +102,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
                 dataSource={stats}
                 pagination={false}
                 bordered
+                rowKey={record => record.i}
                 // footer={() => <span>
                 // القيمة الإجمالية : <Tag style={{fontSize:20 }} color='blue'><span style={{margin:10}}>{grandTotal} (SR)</span></Tag>
                 // </span>}
