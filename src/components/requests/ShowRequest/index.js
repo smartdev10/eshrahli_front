@@ -33,7 +33,8 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
         setTname(teacherName)
         const subject = request.subject ? request.subject.name : request.other
         setSubject(subject)
-        setLevel(request.level.name)
+        const levels = request.level ? request.level.name : 'غير وارد'
+        setLevel(levels)
         setNumberStudent(request.nstudents)
         setSessionDate(request.sessionDate)
         setSearchType(request.search_type)
