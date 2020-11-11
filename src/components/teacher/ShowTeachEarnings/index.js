@@ -30,10 +30,10 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
                   const statsData = data.requests.map((req,i) => {
                     return {
                       i,
-                      total :  <NumberFormat  decimalScale={2} value={req.total} displayType={'text'} thousandSeparator={true} suffix={'SR '} />, 
-                      tax :  <NumberFormat   decimalScale={2} value={req.total * taxx.numberValue * 0.01} displayType={'text'} thousandSeparator={true} suffix={'SR '} />,
-                      appComission :<NumberFormat   decimalScale={2} value={req.total * appCom.numberValue * 0.01} displayType={'text'} thousandSeparator={true} suffix={'SR '} /> ,
-                      grandTotal : <NumberFormat   decimalScale={2} value={req.total + (req.total * taxx.numberValue) * 0.01 + (req.total * appCom.numberValue) * 0.01} displayType={'text'} thousandSeparator={true} suffix={'SR '} /> 
+                      total :  <NumberFormat  decimalScale={2} value={req.total} displayType={'text'} thousandSeparator={true} suffix={' ريال'} />, 
+                      tax :  <NumberFormat   decimalScale={2} value={req.total * taxx.numberValue * 0.01} displayType={'text'} thousandSeparator={true} suffix={' ريال'} />,
+                      appComission :<NumberFormat   decimalScale={2} value={req.total * appCom.numberValue * 0.01} displayType={'text'} thousandSeparator={true} suffix={' ريال'} /> ,
+                      grandTotal : <NumberFormat   decimalScale={2} value={req.total + (req.total * taxx.numberValue) * 0.01 + (req.total * appCom.numberValue) * 0.01} displayType={'text'} thousandSeparator={true} suffix={' ريال'} /> 
                     }
                   })
                   setStatsData(statsData)
@@ -58,6 +58,7 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
         title: 'حاصل الجمع',
         dataIndex: 'total',
         render: text => <span>{text}</span>,
+        align:'right'
       },
       {
         title: 'الضريبة',
@@ -67,10 +68,12 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
       {
         title: 'نسبة التطبيق',
         dataIndex: 'appComission',
+        align:'right'
       },
       {
         title: 'القيمة الإجمالية',
         dataIndex: 'grandTotal',
+        align:'right'
       },
     ];
     
