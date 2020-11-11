@@ -44,6 +44,7 @@
     "react-instantsearch-dom": "^6.8.2",
     "react-intl": "^5.8.8",
     "react-notifications": "^1.7.2",
+    "react-number-format": "^4.4.1",
     "react-pdf": "^5.0.0",
     "react-placeholder": "^4.0.3",
     "react-redux": "^7.2.2",

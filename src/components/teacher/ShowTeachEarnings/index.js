@@ -4,6 +4,7 @@ import IntlMessages from "util/IntlMessages";
 import { SyncOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import axios from 'axios'
+import NumberFormat from 'react-number-format';
 import { fetchSettings } from "../../../appRedux/actions/Settings";
 
 
@@ -29,10 +30,10 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
                   const statsData = data.requests.map((req,i) => {
                     return {
                       i,
-                      total :  req.total,
-                      tax : req.total * taxx.numberValue * 0.01,
-                      appComission : req.total * appCom.numberValue * 0.01,
-                      grandTotal : req.total + (req.total * taxx.numberValue) * 0.01 + (req.total * appCom.numberValue) * 0.01
+                      total :  <NumberFormat  decimalScale={2} value={req.total} displayType={'text'} thousandSeparator={true} suffix={'SR'} />, 
+                      tax :  <NumberFormat   decimalScale={2} value={req.total * taxx.numberValue * 0.01} displayType={'text'} thousandSeparator={true} suffix={'SR'} />,
+                      appComission :<NumberFormat   decimalScale={2} value={req.total * appCom.numberValue * 0.01} displayType={'text'} thousandSeparator={true} suffix={'SR'} /> ,
+                      grandTotal : <NumberFormat   decimalScale={2} value={req.total + (req.total * taxx.numberValue) * 0.01 + (req.total * appCom.numberValue) * 0.01} displayType={'text'} thousandSeparator={true} suffix={'SR'} /> 
                     }
                   })
                   setStatsData(statsData)
@@ -54,21 +55,21 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
 
     const columns = [
       {
-        title: 'حاصل الجمع (SR)',
+        title: 'حاصل الجمع',
         dataIndex: 'total',
         render: text => <span>{text}</span>,
       },
       {
-        title: 'الضريبة (SR)',
+        title: 'الضريبة',
         dataIndex: 'tax',
         align: 'right',
       },
       {
-        title: 'نسبة التطبيق (SR)',
+        title: 'نسبة التطبيق',
         dataIndex: 'appComission',
       },
       {
-        title: 'القيمة الإجمالية (SR)',
+        title: 'القيمة الإجمالية',
         dataIndex: 'grandTotal',
       },
     ];
