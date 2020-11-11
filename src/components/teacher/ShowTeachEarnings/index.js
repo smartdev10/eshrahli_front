@@ -30,10 +30,10 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
                   const statsData = data.requests.map((req,i) => {
                     return {
                       i,
-                      total :  <NumberFormat  decimalScale={2} value={req.total} displayType={'text'} thousandSeparator={true} suffix={' SR'} />, 
-                      tax :  <NumberFormat   decimalScale={2} value={req.total * taxx.numberValue * 0.01} displayType={'text'} thousandSeparator={true} suffix={' SR'} />,
-                      appComission :<NumberFormat   decimalScale={2} value={req.total * appCom.numberValue * 0.01} displayType={'text'} thousandSeparator={true} suffix={' SR'} /> ,
-                      grandTotal : <NumberFormat   decimalScale={2} value={req.total + (req.total * taxx.numberValue) * 0.01 + (req.total * appCom.numberValue) * 0.01} displayType={'text'} thousandSeparator={true} suffix={' SR'} /> 
+                      total :  <NumberFormat  decimalScale={2} value={req.total} displayType={'text'} thousandSeparator={true} suffix={'SR '} />, 
+                      tax :  <NumberFormat   decimalScale={2} value={req.total * taxx.numberValue * 0.01} displayType={'text'} thousandSeparator={true} suffix={'SR '} />,
+                      appComission :<NumberFormat   decimalScale={2} value={req.total * appCom.numberValue * 0.01} displayType={'text'} thousandSeparator={true} suffix={'SR '} /> ,
+                      grandTotal : <NumberFormat   decimalScale={2} value={req.total + (req.total * taxx.numberValue) * 0.01 + (req.total * appCom.numberValue) * 0.01} displayType={'text'} thousandSeparator={true} suffix={'SR '} /> 
                     }
                   })
                   setStatsData(statsData)
