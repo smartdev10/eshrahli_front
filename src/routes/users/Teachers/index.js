@@ -13,6 +13,7 @@ import { fetchSettings } from "../../../appRedux/actions/Settings";
 import AddTeacher from "components/teacher/AddTeacher";
 import EditTeacher from "components/teacher/EditTeacher";
 import ShowTeacher from "components/teacher/ShowTeacher";
+import PropTypes from "prop-types";
 import ShowTeachEarnings from "components/teacher/ShowTeachEarnings";
 
 class Teachers extends React.Component {
@@ -195,7 +196,7 @@ class Teachers extends React.Component {
       this.setState({visible}); 
     }
   };
-  cancel = (e) => {
+  cancel = () => {
     this.setState({ selectedRowKeys:[]  });
   } 
 
@@ -254,7 +255,7 @@ class Teachers extends React.Component {
               this.setState({loadingTable:false}); 
             })
           })
-          .catch((err)=> {
+          .catch(()=> {
             message.error('عطل أثناء التعديل')
             this.setState({loadingTable:false}); 
           }, 2000);
@@ -306,3 +307,17 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps, { fetchSettings , UpdateTeacherStatus, fetchTeachers , CreateTeacher , UpdateTeacher, DeleteTeachers , fetchCities , fetchLevels , fetchSubjects , fetchNationalities })(Teachers)
+
+Teachers.propTypes = {
+  fetchSettings: PropTypes.func,
+  UpdateTeacherStatus: PropTypes.func,
+  fetchTeachers: PropTypes.func,
+  CreateTeacher: PropTypes.func,
+  UpdateTeacher: PropTypes.func,
+  DeleteTeachers: PropTypes.func,
+  fetchCities: PropTypes.func,
+  fetchLevels: PropTypes.func,
+  fetchSubjects: PropTypes.func,
+  fetchNationalities: PropTypes.func,
+  teachers: PropTypes.array,
+};

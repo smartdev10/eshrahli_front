@@ -8,19 +8,19 @@ export const loadNationalities = nationalities => ({
 });
 
 export const CreateNationality = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("CREATE", "nationalities/create", params)
   };
 };
 
 export const UpdateNationality = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "nationalities/update", params)
   };
 };
 
 export const DeleteNationalities = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "nationalities/delete", params)
   };
 };
@@ -42,7 +42,7 @@ export const fetchNationalities = (params = {
 
 
 export const fetchOneNationality = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "nationalities", params)
   };
 };

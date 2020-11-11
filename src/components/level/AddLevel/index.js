@@ -3,6 +3,7 @@ import { Input, Modal , Select } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 const Option = Select.Option;
 
@@ -75,3 +76,10 @@ class AddLevel extends React.Component {
 
 export default AddLevel
 
+
+AddLevel.propTypes = {
+  subjects: PropTypes.array,
+  open: PropTypes.bool,
+  onToggleModal: PropTypes.func,
+  onAddLevel: PropTypes.func,
+};

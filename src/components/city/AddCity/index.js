@@ -3,6 +3,7 @@ import { Input, Modal } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 class AddCity extends React.Component {
   constructor() {
@@ -58,3 +59,10 @@ class AddCity extends React.Component {
 }
 
 export default AddCity;
+
+AddCity.propTypes = {
+  onToggleModal:PropTypes.func,
+  onAddCity:PropTypes.func,
+  open:PropTypes.bool
+};
+

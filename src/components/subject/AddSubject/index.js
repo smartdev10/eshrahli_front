@@ -3,6 +3,7 @@ import { Input, Modal , Radio , Form } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 
 const RadioGroup = Radio.Group;
@@ -78,3 +79,9 @@ class AddSubject extends React.Component {
 }
 
 export default AddSubject;
+
+AddSubject.propTypes = {
+  onAddSubject: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool
+};

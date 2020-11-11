@@ -8,19 +8,19 @@ export const loadPages = pages => ({
 });
 
 export const CreatePage = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("CREATE", "pages/create", params)
   };
 };
 
 export const UpdatePage = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "pages/update", params)
   };
 };
 
 export const DeletePages = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "pages/delete", params)
   };
 };
@@ -42,7 +42,7 @@ export const fetchPages = (params = {
 
 
 export const fetchOnePage = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "pages", params)
   };
 };

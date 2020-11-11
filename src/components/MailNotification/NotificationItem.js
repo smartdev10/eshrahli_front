@@ -1,5 +1,6 @@
 import React from "react";
 import IntlMessages from "util/IntlMessages"
+import PropTypes from "prop-types";
 
 const NotificationItem = ({notification}) => {
   const {name, time, message} = notification;
@@ -19,3 +20,7 @@ const NotificationItem = ({notification}) => {
 };
 
 export default NotificationItem;
+
+NotificationItem.propTypes = {
+  notification: PropTypes.object,
+};

@@ -8,6 +8,7 @@ import AddSubject from "components/subject/AddSubject";
 import EditSubject from "components/subject/EditSubject";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 
 class Subjects extends React.Component {
@@ -29,7 +30,7 @@ class Subjects extends React.Component {
       <div style={{ padding: 8 }}>
        <FormattedMessage id="columns.name" defaultMessage="name">
           {
-            placeholder => (
+            () => (
           <Input
             ref={node => {
               this.searchInput = node;
@@ -141,7 +142,7 @@ class Subjects extends React.Component {
     });   
   }
 
-  cancel = (e) => {
+  cancel = () => {
     this.setState({ selectedRowKeys:[]  });
   } 
 
@@ -214,3 +215,11 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { fetchSubjects , CreateSubject , UpdateSubject , DeleteSubject })(Subjects)
+
+Subjects.propTypes = {
+  fetchSubjects: PropTypes.func,
+  CreateSubject: PropTypes.func,
+  UpdateSubject: PropTypes.func,
+  DeleteSubject: PropTypes.func,
+  subjects: PropTypes.array,
+};

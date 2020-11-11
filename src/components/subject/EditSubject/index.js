@@ -3,6 +3,7 @@ import { Input, Modal , Radio , Form } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 const RadioGroup = Radio.Group;
 
@@ -82,3 +83,12 @@ const EditSubject = ({ onSaveSubject, onToggleModal, open, subject }) => {
 }
 
 export default React.memo(EditSubject);
+
+
+
+EditSubject.propTypes = {
+  onSaveSubject: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  subject: PropTypes.object,
+  open: PropTypes.bool,
+};

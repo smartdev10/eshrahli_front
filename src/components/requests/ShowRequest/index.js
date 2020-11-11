@@ -2,6 +2,7 @@ import React , { useState , useEffect } from "react";
 import { Modal , Card  , Col , Row } from "antd";
 import IntlMessages from "util/IntlMessages";
 import moment from 'moment';
+import PropTypes from "prop-types";
 
 const ShowRequest = ({ onToggleModal, open, request }) => {
 
@@ -184,3 +185,9 @@ const ShowRequest = ({ onToggleModal, open, request }) => {
 }
 
 export default React.memo(ShowRequest);
+
+ShowRequest.propTypes = {
+  request: PropTypes.object,
+  open:PropTypes.bool,
+  onToggleModal:PropTypes.func
+};

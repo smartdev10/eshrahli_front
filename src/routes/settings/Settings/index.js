@@ -8,6 +8,7 @@ import AddSetting from "components/setting/AddSetting";
 import EditSetting from "components/setting/EditSetting";
 import { fetchSettings , CreateSetting , UpdateSetting , DeleteSetting , loadSettings } from "../../../appRedux/actions/Settings";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 
 class Settings extends React.Component {
@@ -27,7 +28,7 @@ class Settings extends React.Component {
       <div style={{ padding: 8 }}>
       <FormattedMessage id="columns.name" defaultMessage="name">
           {
-            placeholder => (
+            () => (
           <Input
             ref={node => {
               this.searchInput = node;
@@ -188,3 +189,11 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps,{ loadSettings , fetchSettings , CreateSetting , UpdateSetting , DeleteSetting } )(Settings)
 
 
+Settings.propTypes = {
+  loadSettings: PropTypes.func,
+  fetchSettings: PropTypes.func,
+  CreateSetting: PropTypes.func,
+  UpdateSetting: PropTypes.func,
+  DeleteSetting: PropTypes.func,
+  settings: PropTypes.array,
+};

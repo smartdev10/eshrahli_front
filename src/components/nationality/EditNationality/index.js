@@ -3,6 +3,7 @@ import { Input, Modal } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 const EditNationality = ({ onSaveNationality , onToggleModal, open, nationality }) => {
   
@@ -58,3 +59,10 @@ const EditNationality = ({ onSaveNationality , onToggleModal, open, nationality 
 }
 
 export default React.memo(EditNationality);
+
+EditNationality.propTypes = {
+  nationality: PropTypes.object,
+  onSaveNationality: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool
+};

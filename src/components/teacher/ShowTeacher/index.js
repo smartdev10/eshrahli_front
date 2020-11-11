@@ -3,6 +3,7 @@ import { Modal , Card , Tag , Col , Row  } from "antd";
 import { Document , Page , pdfjs } from 'react-pdf/dist/esm/entry.webpack';
 import IntlMessages from "util/IntlMessages";
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import PropTypes from "prop-types";
 
 const ShowTeacher = ({ onToggleModal, open, teacher }) => {
   pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -262,3 +263,9 @@ const ShowTeacher = ({ onToggleModal, open, teacher }) => {
 }
 
 export default React.memo(ShowTeacher);
+
+ShowTeacher.propTypes = {
+  teacher: PropTypes.object,
+  open:PropTypes.bool,
+  onToggleModal:PropTypes.func,
+};

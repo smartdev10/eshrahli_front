@@ -8,19 +8,19 @@ export const loadCoupons = coupons => ({
 });
 
 export const CreateCoupon = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("CREATE", "coupons/create", params)
   };
 };
 
 export const UpdateCoupon = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "coupons/update", params)
   };
 };
 
 export const DeleteCoupon = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "coupons/delete", params)
   };
 };
@@ -42,7 +42,7 @@ export const fetchCoupons = (params = {
 
 
 export const fetchOneCoupon = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "coupons", params)
   };
 };

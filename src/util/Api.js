@@ -89,13 +89,14 @@ export function dataProvider(type , path , params) {
         url = `${path}/${params.id}`;
         method = 'DELETE';
         break;
-    case "DELETE_MANY":
+    case "DELETE_MANY":{
         const query = {
             filter: JSON.stringify({ ...params }),
         };
         url = `${path}?${stringify(query)}`;
         method = 'DELETE';
         break;
+    }
     case "GET_MANY":{
         const query = {
             filter: JSON.stringify({ ...params }),

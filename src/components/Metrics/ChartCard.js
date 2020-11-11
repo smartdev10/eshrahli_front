@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import Widget from "components/Widget/index";
 
 const ChartCard = ({title, children, styleName, desc}) => {
@@ -16,3 +16,11 @@ const ChartCard = ({title, children, styleName, desc}) => {
 };
 
 export default ChartCard;
+
+
+ChartCard.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node,
+  styleName: PropTypes.string,
+  desc: PropTypes.string,
+};

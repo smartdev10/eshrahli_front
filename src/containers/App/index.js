@@ -10,6 +10,8 @@ import ForgotPassword from "../ForgotPassword";
 import SignIn from "../SignIn";
 import ResetPassword from "../Resetpassword";
 import VerifyCode from "../VerifyCode";
+import PropTypes from "prop-types";
+
 
 const customizeRenderEmpty = () => (
   <div style={{ textAlign: 'center' }}>
@@ -83,3 +85,10 @@ const App = () => {
 };
 
 export default memo(App);
+
+
+RestrictedRoute.propTypes = {
+  component: PropTypes.elementType,
+  location: PropTypes.object,
+  token: PropTypes.string,
+};

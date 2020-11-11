@@ -3,6 +3,7 @@ import { Input, Modal } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 class AddNationality extends React.Component {
 
@@ -56,3 +57,10 @@ class AddNationality extends React.Component {
 }
 
 export default AddNationality;
+
+AddNationality.propTypes = {
+  nationality: PropTypes.object,
+  onAddNationality: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool
+};

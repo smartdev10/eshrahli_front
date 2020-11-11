@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-
+import PropTypes from "prop-types";
 import Cities from "./Cities";
 import Subjects from "./Subjects";
 import Coupons from "./Coupons";
@@ -21,3 +21,7 @@ const Settings = ({match}) => (
 );
 
 export default Settings;
+
+Settings.propTypes = {
+  match: PropTypes.object,
+};

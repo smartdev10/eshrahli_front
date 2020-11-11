@@ -9,7 +9,7 @@ import { FETCH_ERROR } from "../../constants/ActionTypes";
 const FormItem = Form.Item;
 
 
-const VerifyCode = (props) => {
+const VerifyCode = () => {
 
   const loading = useSelector(({common}) => common.loading);
   const error = useSelector(({common}) => common.error);
@@ -71,3 +71,4 @@ const VerifyCode = (props) => {
 }
 
 export default VerifyCode
+

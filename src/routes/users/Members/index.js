@@ -9,6 +9,7 @@ import EditUser from "components/users/EditUser";
 import IntlMessages from "util/IntlMessages";
 import jwtDecode from "jwt-decode";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 
 class Members extends React.Component {
@@ -28,7 +29,7 @@ class Members extends React.Component {
       <div style={{ padding: 8 }}>
         <FormattedMessage id="columns.name" defaultMessage="name">
           {
-            placeholder => (
+            () => (
           <Input
             ref={node => {
               this.searchInput = node;
@@ -204,7 +205,7 @@ class Members extends React.Component {
       ),
      align:'right'
     },{
-      title: 'تعديل الحالة', dataIndex: '', key: '', render: ({status , username , name , mobile , password , id}) => (
+      title: 'تعديل الحالة', dataIndex: '', key: '', render: ({status , username , name , mobile , id}) => (
          <Switch  checkedChildren="مفعل" unCheckedChildren="غير مفعل"   defaultChecked={status === "active" ? true : false}  onChange={(checked) => {
           let status = checked ? "active" : "inactive"
           this.setState({loadingTable:true}); 
@@ -225,7 +226,7 @@ class Members extends React.Component {
             message.success('تمت العملية بنجاح')
             this.setState({loadingTable:false});
           })
-          .catch((err)=> {
+          .catch(()=> {
             message.error('عطل أثناء التعديل')
             this.setState({loadingTable:false}); 
           }, 2000);
@@ -269,3 +270,11 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps,{fetchUsers , CreateUser , UpdateUser, DeleteUsers })(Members)
 
 
+Members.propTypes = {
+  users: PropTypes.array,
+  auth: PropTypes.object,
+  fetchUsers: PropTypes.func,
+  CreateUser: PropTypes.func,
+  UpdateUser: PropTypes.func,
+  DeleteUsers: PropTypes.func,
+};

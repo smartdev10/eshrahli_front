@@ -3,7 +3,7 @@ import { Input, Modal , Select , Form ,message } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
-
+import PropTypes from "prop-types";
 const Option = Select.Option;
 
 class AddUser extends React.Component {
@@ -137,3 +137,9 @@ class AddUser extends React.Component {
 }
 
 export default AddUser;
+
+AddUser.propTypes = {
+  onAddUser: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool,
+};

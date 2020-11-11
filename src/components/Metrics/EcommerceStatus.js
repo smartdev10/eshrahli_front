@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import Widget from "components/Widget/index";
 
 const EcommerceStatus = ({icon, title, subTitle, color, colorTitle, colorSubTitle}) => {
@@ -19,3 +19,12 @@ const EcommerceStatus = ({icon, title, subTitle, color, colorTitle, colorSubTitl
 };
 
 export default EcommerceStatus;
+
+EcommerceStatus.propTypes = {
+  icon: PropTypes.string,
+  title: PropTypes.string,
+  subTitle: PropTypes.string,
+  color: PropTypes.string,
+  colorTitle: PropTypes.string,
+  colorSubTitle: PropTypes.string,
+};

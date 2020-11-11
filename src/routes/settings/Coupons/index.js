@@ -9,6 +9,7 @@ import IntlMessages from "util/IntlMessages";
 import Highlighter from 'react-highlight-words';
 import { fetchCoupons , CreateCoupon , UpdateCoupon , DeleteCoupon } from "../../../appRedux/actions/Coupons";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 class Coupons extends React.Component {
   state = {
@@ -29,7 +30,7 @@ class Coupons extends React.Component {
       <div style={{ padding: 8 }}>
         <FormattedMessage id="columns.name" defaultMessage="name">
           {
-            placeholder => (
+            () => (
           <Input
             ref={node => {
               this.searchInput = node;
@@ -150,7 +151,7 @@ class Coupons extends React.Component {
     });   
   }
 
-  cancel = (e) => {
+  cancel = () => {
     this.setState({ selectedRowKeys:[]  });
   } 
   
@@ -207,7 +208,7 @@ class Coupons extends React.Component {
               this.setState({loadingTable:false}); 
             })
           })
-          .catch((err)=> {
+          .catch(()=> {
             message.error('عطل أثناء التعديل')
             this.setState({loadingTable:false}); 
           }, 2000);
@@ -254,3 +255,11 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { fetchCoupons , CreateCoupon , UpdateCoupon , DeleteCoupon })(Coupons)
+
+Coupons.propTypes = {
+  fetchCoupons: PropTypes.func,
+  CreateCoupon: PropTypes.func,
+  UpdateCoupon: PropTypes.func,
+  DeleteCoupon: PropTypes.func,
+  coupons: PropTypes.array,
+};

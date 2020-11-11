@@ -8,25 +8,25 @@ export const loadTeachers = teachers => ({
 });
 
 export const CreateTeacher = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("CREATE", "teachers/create", params)
   };
 };
 
 export const UpdateTeacher = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "teachers/update", params)
   };
 };
 
 export const UpdateTeacherStatus = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "teachers/status", params)
   };
 };
 
 export const DeleteTeachers = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "teachers/soft_delete", params)
   };
 };
@@ -48,7 +48,7 @@ export const fetchTeachers = (params = {
 
 
 export const fetchOneTeacher = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "teachers", params)
   };
 };

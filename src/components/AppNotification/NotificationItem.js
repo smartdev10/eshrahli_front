@@ -1,5 +1,6 @@
 import React from "react";
 import {Avatar} from "antd";
+import PropTypes from 'prop-types';
 
 
 const NotificationItem = ({notification}) => {
@@ -19,3 +20,10 @@ const NotificationItem = ({notification}) => {
 };
 
 export default NotificationItem;
+
+
+NotificationItem.propTypes = {
+  notification: PropTypes.object,
+};
+
+

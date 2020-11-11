@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import axios from 'axios'
 import NumberFormat from 'react-number-format';
 import { fetchSettings } from "../../../appRedux/actions/Settings";
+import PropTypes from "prop-types";
 
 
 const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
@@ -57,7 +58,6 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
       {
         title: 'حاصل الجمع',
         dataIndex: 'total',
-        render: text => <span>{text}</span>,
         align:'right'
       },
       {
@@ -121,3 +121,9 @@ const ShowTeacherEarning = ({ onToggleModal, open, teacher }) => {
 }
 
 export default React.memo(ShowTeacherEarning);
+
+ShowTeacherEarning.propTypes = {
+  onToggleModal: PropTypes.func,
+  teacher: PropTypes.object,
+  open: PropTypes.bool,
+};

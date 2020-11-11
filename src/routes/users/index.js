@@ -3,6 +3,7 @@ import {Route, Switch} from "react-router-dom";
 import Teachers from "./Teachers";
 import Students from "./Students";
 import Members from "./Members";
+import PropTypes from "prop-types";
 
 
 const Users = ({match}) => (
@@ -14,3 +15,7 @@ const Users = ({match}) => (
 );
 
 export default Users;
+
+Users.propTypes = {
+  match: PropTypes.object,
+};

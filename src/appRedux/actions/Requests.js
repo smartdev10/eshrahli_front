@@ -8,13 +8,13 @@ export const loadRequests = requests => ({
 });
 
 export const UpdateRequest= (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "requests/update", params)
   };
 };
 
 export const DeleteRequests = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "requests/delete", params)
   };
 };
@@ -36,7 +36,7 @@ export const fetchRequests = (params = {
 
 
 export const fetchOneRequet = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "requests", params)
   };
 };

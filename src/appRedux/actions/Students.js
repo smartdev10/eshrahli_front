@@ -8,19 +8,19 @@ export const loadStudents = students => ({
 });
 
 export const CreateStudent = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("CREATE", "students/create", params)
   };
 };
 
 export const UpdateStudent = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "students/update", params)
   };
 };
 
 export const DeleteStudents = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "students/soft_delete", params)
   };
 };
@@ -43,7 +43,7 @@ export const fetchStudents = (params = {
 
 
 export const fetchOneStudent = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "students", params)
   };
 };

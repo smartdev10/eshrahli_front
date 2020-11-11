@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const AppModuleHeader = (props) => {
 
@@ -27,9 +28,16 @@ const AppModuleHeader = (props) => {
 
 export default AppModuleHeader;
 
+AppModuleHeader.propTypes = {
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+};
+
 AppModuleHeader.defaultProps = {
   styleName: '',
   value: '',
+  placeholder: '',
   notification: true,
   apps: true
 };

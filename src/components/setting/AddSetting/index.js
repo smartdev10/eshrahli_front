@@ -3,6 +3,7 @@ import { Input, Modal } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 class AddSetting extends React.Component {
   constructor() {
@@ -75,3 +76,9 @@ class AddSetting extends React.Component {
 }
 
 export default AddSetting;
+
+AddSetting.propTypes = {
+  onAddSetting: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool
+};

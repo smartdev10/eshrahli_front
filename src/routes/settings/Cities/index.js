@@ -8,6 +8,7 @@ import AddCity from "components/city/AddCity";
 import EditCity from "components/city/EditCity";
 import { fetchCities , CreateCity , UpdateCity , DeleteCity } from "../../../appRedux/actions/Cities";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 
 class Cities extends React.Component {
@@ -27,7 +28,7 @@ class Cities extends React.Component {
       <div style={{ padding: 8 }}>
       <FormattedMessage id="columns.name" defaultMessage="name">
           {
-            placeholder => (
+            () => (
             <Input
               ref={node => {
                 this.searchInput = node;
@@ -146,7 +147,7 @@ class Cities extends React.Component {
       this.setState({visible}); 
     }
   };
-  cancel = (e) => {
+  cancel = () => {
     this.setState({ selectedRowKeys:[]  });
   } 
 
@@ -204,3 +205,10 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps,{ fetchCities , CreateCity , UpdateCity , DeleteCity } )(Cities)
 
 
+Cities.propTypes = {
+  fetchCities: PropTypes.func,
+  CreateCity: PropTypes.func,
+  UpdateCity: PropTypes.func,
+  DeleteCity: PropTypes.func,
+  cities: PropTypes.array,
+};

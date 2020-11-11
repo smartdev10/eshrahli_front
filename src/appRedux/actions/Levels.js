@@ -9,19 +9,19 @@ export const loadLevels = levels => ({
 
 export const CreateLevel = (params) => {
   console.log(params)
-  return dispatch => {
+  return () => {
     return dataProvider("CREATE", "levels/create", params)
   };
 };
 
 export const UpdateLevel = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "levels/update", params)
   };
 };
 
 export const DeleteLevel = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "levels/delete", params)
   };
 };
@@ -43,13 +43,13 @@ export const fetchLevels = (params = {
 
 
 export const fetchManyLevel = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_MANY", "levels/many", params)
   };
 };
 
 export const fetchOneLevel = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "levels", params)
   };
 };

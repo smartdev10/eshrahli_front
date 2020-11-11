@@ -8,19 +8,19 @@ export const loadUsers = users => ({
 });
 
 export const CreateUser = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("CREATE", "admin/register", params)
   };
 };
 
 export const UpdateUser = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "admin/users/update", params)
   };
 };
 
 export const DeleteUsers = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "admin/users/delete", params)
   };
 };
@@ -42,7 +42,7 @@ export const fetchUsers = (params = {
 
 
 export const fetchOneUser = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "admin/users", params)
   };
 };

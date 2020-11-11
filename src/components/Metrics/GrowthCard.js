@@ -1,5 +1,6 @@
 import React from "react";
 import Widget from "components/Widget/index";
+import PropTypes from "prop-types";
 
 const GrowthCard = ({title, children, styleName, desc, bgColor, textColor}) => {
   return (
@@ -15,3 +16,11 @@ const GrowthCard = ({title, children, styleName, desc, bgColor, textColor}) => {
 };
 
 export default GrowthCard;
+GrowthCard.propTypes = {
+  title: PropTypes.string,
+  styleName: PropTypes.string,
+  children: PropTypes.node,
+  desc: PropTypes.string,
+  bgColor: PropTypes.string,
+  textColor: PropTypes.string,
+};

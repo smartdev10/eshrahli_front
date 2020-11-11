@@ -7,6 +7,7 @@ import ShowRequest from "components/requests/ShowRequest";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import Highlighter from 'react-highlight-words';
+import PropTypes from "prop-types";
 
 
 
@@ -24,7 +25,7 @@ class Requests extends React.Component {
       <div style={{ padding: 8 }}>
       <FormattedMessage id="columns.name" defaultMessage="name">
           {
-            placeholder => (
+            () => (
           <Input
             ref={node => {
               this.searchInput = node;
@@ -183,3 +184,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { fetchRequests })(Requests)
+Requests.propTypes = {
+  fetchRequests: PropTypes.func,
+  requests: PropTypes.array,
+}

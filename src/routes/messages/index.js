@@ -5,6 +5,7 @@ import IntlMessages from "util/IntlMessages";
 import {  DeleteOutlined , EyeFilled } from "@ant-design/icons";
 import ShowMessage from "components/message/ShowMessage";
 import { fetchMessages , DeleteMessages } from "../../appRedux/actions/Messages";
+import PropTypes from "prop-types";
 
 
 class Messages extends React.Component {
@@ -59,7 +60,7 @@ class Messages extends React.Component {
       this.setState({visible}); 
     }
   };
-  cancel = (e) => {
+  cancel = () => {
     this.setState({ selectedRowKeys:[]  });
   } 
 
@@ -117,3 +118,8 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, { fetchMessages , DeleteMessages })(Messages)
 
 
+Messages.propTypes = {
+  fetchMessages: PropTypes.func,
+  DeleteMessages: PropTypes.func,
+  messages: PropTypes.array,
+};

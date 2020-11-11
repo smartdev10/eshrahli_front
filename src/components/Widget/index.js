@@ -21,5 +21,6 @@ Widget.propTypes = {
   extra: PropTypes.node,
   cover: PropTypes.node,
   actions: PropTypes.node,
+  styleName: PropTypes.string,
   children: PropTypes.node.isRequired
 };

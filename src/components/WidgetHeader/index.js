@@ -18,6 +18,7 @@ WidgetHeader.defaultProps = {
 WidgetHeader.propTypes = {
   title: PropTypes.node,
   extra: PropTypes.node,
+  styleName: PropTypes.string,
 };
 
 export default WidgetHeader;

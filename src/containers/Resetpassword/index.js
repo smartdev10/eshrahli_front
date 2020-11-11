@@ -5,6 +5,7 @@ import jwtDecode from "jwt-decode";
 import {useDispatch, useSelector} from "react-redux";
 import {userResetPassword} from "appRedux/actions/Auth";
 import { FETCH_ERROR } from "../../constants/ActionTypes";
+import PropTypes from "prop-types";
 
 const FormItem = Form.Item;
 
@@ -94,3 +95,7 @@ const ResetPassword = (props) => {
 };
 
 export default ResetPassword;
+
+ResetPassword.propTypes = {
+  history: PropTypes.object,
+};

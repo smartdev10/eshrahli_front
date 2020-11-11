@@ -9,6 +9,7 @@ import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import PropTypes from "prop-types";
 
 
 const EditPage = ({ onSavePage, onToggleModal, open, id , name , content , page , count }) => {
@@ -99,3 +100,15 @@ const EditPage = ({ onSavePage, onToggleModal, open, id , name , content , page 
 }
 
 export default EditPage;
+
+
+EditPage.propTypes = {
+  onSavePage: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool,
+  id: PropTypes.string,
+  name: PropTypes.string,
+  content: PropTypes.string,
+  count: PropTypes.number,
+  page: PropTypes.object
+};

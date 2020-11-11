@@ -4,7 +4,7 @@ import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
 import moment from "moment";
-
+import PropTypes from "prop-types";
 const RangePicker = DatePicker.RangePicker;
 const {TextArea} = Input;
 
@@ -156,3 +156,10 @@ const EditCoupon = ({ onSaveCoupon, onToggleModal, open, coupon }) => {
 }
 
 export default React.memo(EditCoupon);
+
+EditCoupon.propTypes = {
+  coupon: PropTypes.object,
+  onToggleModal:PropTypes.func,
+  onSaveCoupon:PropTypes.func,
+  open:PropTypes.bool
+};

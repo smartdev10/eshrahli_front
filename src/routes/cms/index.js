@@ -6,6 +6,7 @@ import EditPage from "components/page/EditPage";
 import { PlusCircleFilled , DeleteOutlined , EditOutlined } from "@ant-design/icons";
 import { fetchPages , CreatePage , UpdatePage , DeletePages } from "appRedux/actions/Pages";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class Pages extends React.Component {
   state = {
@@ -76,7 +77,7 @@ class Pages extends React.Component {
     }
   };
 
-  cancel = (e) => {
+  cancel = () => {
     this.setState({ selectedRowKeys:[]  });
   }  
 
@@ -135,3 +136,10 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,{fetchPages , CreatePage , UpdatePage , DeletePages})(Pages)
+Pages.propTypes = {
+  pages: PropTypes.array,
+  fetchPages: PropTypes.func,
+  CreatePage: PropTypes.func,
+  UpdatePage: PropTypes.func,
+  DeletePages: PropTypes.func,
+};

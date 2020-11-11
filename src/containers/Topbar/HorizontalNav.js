@@ -8,7 +8,7 @@ import IntlMessages from "util/IntlMessages"
 
 const SubMenu = Menu.SubMenu;
 
-const HorizontalNav = (props) => {
+const HorizontalNav = () => {
 
   const {pathname} = useSelector(({common}) => common);
  

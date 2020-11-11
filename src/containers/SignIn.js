@@ -7,6 +7,7 @@ import {userSignIn} from "../appRedux/actions/Auth";
 import IntlMessages from "util/IntlMessages";
 import {Link} from "react-router-dom";
 const FormItem = Form.Item;
+import PropTypes from "prop-types";
 
 const SignIn = (props) => {
   
@@ -66,3 +67,8 @@ const SignIn = (props) => {
 };
 
 export default SignIn;
+
+
+SignIn.propTypes = {
+  history: PropTypes.object,
+};

@@ -3,6 +3,7 @@ import { Input, message, Modal } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 const EditSetting = ({ onSaveSetting, onToggleModal, open, setting }) => {
   
@@ -82,3 +83,11 @@ const EditSetting = ({ onSaveSetting, onToggleModal, open, setting }) => {
 }
 
 export default React.memo(EditSetting);
+
+
+EditSetting.propTypes = {
+  setting: PropTypes.object,
+  onSaveSetting: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool
+};

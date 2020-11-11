@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import Widget from "components/Widget/index";
 import {connect} from "react-redux";
 
@@ -26,3 +26,9 @@ const mapStateToProps = ({settings}) => {
   return {themeType}
 };
 export default connect(mapStateToProps, null)(IconWithTextCard);
+
+IconWithTextCard.propTypes = {
+  icon: PropTypes.string,
+  title: PropTypes.number,
+  subTitle: PropTypes.string,
+};

@@ -3,6 +3,7 @@ import { Input, Modal , Radio , Form } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 
 const RadioGroup = Radio.Group;
@@ -124,3 +125,10 @@ const EditStudent = ({ onSaveStudent, onToggleModal, open, student }) => {
 }
 
 export default React.memo(EditStudent);
+
+EditStudent.propTypes = {
+  student: PropTypes.object,
+  open:PropTypes.bool,
+  onToggleModal:PropTypes.func,
+  onSaveStudent:PropTypes.func
+};

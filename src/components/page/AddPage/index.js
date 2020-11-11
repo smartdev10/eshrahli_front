@@ -7,6 +7,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import { convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import PropTypes from "prop-types";
 
 class AddPage extends React.Component {
   
@@ -85,3 +86,13 @@ class AddPage extends React.Component {
 }
 
 export default AddPage;
+
+AddPage.propTypes = {
+  onAddPage: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool,
+  id: PropTypes.number,
+  name: PropTypes.string,
+  content: PropTypes.string,
+  page: PropTypes.string,
+};

@@ -8,19 +8,19 @@ export const loadSubjects = subjects => ({
 });
 
 export const CreateSubject = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("CREATE", "subjects/create", params)
   };
 };
 
 export const UpdateSubject = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "subjects/update", params)
   };
 };
 
 export const DeleteSubject = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "subjects/delete", params)
   };
 };
@@ -42,7 +42,7 @@ export const fetchSubjects = (params = {
 
 
 export const fetchOneSubject = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "subjects", params)
   };
 };

@@ -9,7 +9,7 @@ export const loadMessages = messages => ({
 
 
 export const DeleteMessages = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "messages/delete", params)
   };
 };
@@ -31,7 +31,7 @@ export const fetchMessages = (params = {
 
 
 export const fetchOneMessage = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "messages", params)
   };
 };

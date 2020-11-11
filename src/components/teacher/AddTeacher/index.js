@@ -6,6 +6,7 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { fetchManyLevel } from "../../../appRedux/actions/Levels";
 
+import PropTypes from "prop-types";
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -391,3 +392,15 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps , {fetchManyLevel})(AddTeacher)
+
+
+AddTeacher.propTypes = {
+  fetchManyLevel: PropTypes.func,
+  onAddTeacher: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool,
+  nationalities: PropTypes.array,
+  subjects: PropTypes.array,
+  levels: PropTypes.array,
+  cities: PropTypes.array,
+};

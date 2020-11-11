@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const SearchBox = ({styleName, placeholder, onChange, value}) => {
 
@@ -17,4 +18,11 @@ export default SearchBox;
 SearchBox.defaultProps = {
   styleName: "",
   value: "",
+};
+
+SearchBox.propTypes = {
+  styleName: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };

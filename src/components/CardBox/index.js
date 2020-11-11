@@ -19,7 +19,10 @@ const CardBox = ({heading, children, styleName, childrenStyle}) => {
 export default CardBox;
 
 CardBox.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  heading: PropTypes.string,
+  styleName: PropTypes.string,
+  childrenStyle: PropTypes.string,
 };
 
 CardBox.defaultProps = {

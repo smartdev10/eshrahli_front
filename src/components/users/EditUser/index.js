@@ -3,6 +3,7 @@ import { Input, Modal , Select , Form } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 const Option = Select.Option;
 
@@ -142,3 +143,10 @@ const EditUser = ({ onSaveUser, onToggleModal, open, user }) => {
 }
 
 export default React.memo(EditUser);
+
+EditUser.propTypes = {
+  user: PropTypes.object,
+  onSaveUser: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool,
+};

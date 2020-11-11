@@ -8,7 +8,7 @@ import {SearchOutlined , PlusCircleFilled, DeleteOutlined , EditOutlined } from 
 import { fetchNationalities , CreateNationality , UpdateNationality , DeleteNationalities } from "../../../appRedux/actions/Nationalities";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
-
+import PropTypes from "prop-types";
 
 
 class Nationalities extends React.Component {
@@ -30,7 +30,7 @@ class Nationalities extends React.Component {
       <div style={{ padding: 8 }}>
          <FormattedMessage id="columns.name" defaultMessage="name">
           {
-            placeholder => (
+            () => (
           <Input
             ref={node => {
               this.searchInput = node;
@@ -140,7 +140,7 @@ class Nationalities extends React.Component {
     });   
   }
 
-  cancel = (e) => {
+  cancel = () => {
     this.setState({ selectedRowKeys:[]  });
   } 
   
@@ -204,3 +204,10 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { fetchNationalities , CreateNationality , UpdateNationality , DeleteNationalities })(Nationalities)
+Nationalities.propTypes = {
+  fetchNationalities: PropTypes.func,
+  CreateNationality: PropTypes.func,
+  UpdateNationality: PropTypes.func,
+  DeleteNationalities: PropTypes.func,
+  nationalities: PropTypes.array,
+};

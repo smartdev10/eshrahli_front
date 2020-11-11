@@ -2,6 +2,7 @@ import React , { useState , useEffect } from "react";
 import { Input, Modal } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
+import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
 
 const EditCity = ({ onSaveCity, onToggleModal, open, city }) => {
@@ -58,3 +59,11 @@ const EditCity = ({ onSaveCity, onToggleModal, open, city }) => {
 }
 
 export default React.memo(EditCity);
+
+
+EditCity.propTypes = {
+  city: PropTypes.object,
+  open: PropTypes.bool,
+  onSaveCity:PropTypes.func,
+  onToggleModal:PropTypes.func,
+};

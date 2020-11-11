@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { fetchStudents , CreateStudent , UpdateStudent, DeleteStudents } from "../../../appRedux/actions/Students";
 import { FormattedMessage } from "react-intl";
 import { fetchCities } from "../../../appRedux/actions/Cities";
-
+import PropTypes from "prop-types";
 
 class Students extends React.Component {
 
@@ -30,7 +30,7 @@ class Students extends React.Component {
       <div style={{ padding: 8 }}>
         <FormattedMessage id="columns.name" defaultMessage="name">
           {
-            placeholder => (
+            () => (
           <Input
             ref={node => {
               this.searchInput = node;
@@ -156,7 +156,7 @@ class Students extends React.Component {
       this.setState({visible}); 
     }
   };
-  cancel = (e) => {
+  cancel = () => {
     this.setState({ selectedRowKeys:[]  });
   } 
 
@@ -193,7 +193,7 @@ class Students extends React.Component {
      align:'right'
     },
     {
-      title: 'تعديل الحالة', dataIndex: '', key: '', render: ({status , name , mobile , password , id}) => (
+      title: 'تعديل الحالة', dataIndex: '', key: '', render: ({status , name , mobile , id}) => (
          <Switch  checkedChildren="مفعل" unCheckedChildren="غير مفعل"   defaultChecked={status === "active" ? true : false}  onChange={(checked) => {
           let status = checked ? "active" : "inactive"
           this.setState({loadingTable:true}); 
@@ -204,7 +204,7 @@ class Students extends React.Component {
               this.setState({loadingTable:false}); 
             })
           })
-          .catch((err)=> {
+          .catch(()=> {
             message.error('عطل أثناء التعديل')
             this.setState({loadingTable:false}); 
           }, 2000);
@@ -249,3 +249,12 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps, { fetchStudents ,  CreateStudent , UpdateStudent, DeleteStudents , fetchCities })(Students)
+
+Students.propTypes = {
+  fetchStudents: PropTypes.func,
+  CreateStudent: PropTypes.func,
+  UpdateStudent: PropTypes.func,
+  DeleteStudents: PropTypes.func,
+  fetchCities: PropTypes.func,
+  students: PropTypes.array,
+};

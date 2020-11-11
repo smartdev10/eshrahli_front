@@ -3,6 +3,7 @@ import { Input, Modal , Select } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 
 const Option = Select.Option;
@@ -82,3 +83,12 @@ const EditLevel = ({ onSaveLevel, onToggleModal, open, level , subjects }) => {
 }
 
 export default React.memo(EditLevel);
+
+
+EditLevel.propTypes = {
+  level: PropTypes.object,
+  subjects: PropTypes.array,
+  onToggleModal:PropTypes.func,
+  onSaveLevel:PropTypes.func,
+  open:PropTypes.bool
+};

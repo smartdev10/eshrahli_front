@@ -2,6 +2,7 @@ import React from "react";
 import {Route, Switch} from "react-router-dom";
 import Main from "./main/index";
 import asyncComponent from "util/asyncComponent2";
+import PropTypes from "prop-types";
 
 const App = ({match}) => (
   <div className="gx-main-content-wrapper">
@@ -17,3 +18,7 @@ const App = ({match}) => (
 );
 
 export default App;
+
+App.propTypes = {
+  match: PropTypes.object,
+};

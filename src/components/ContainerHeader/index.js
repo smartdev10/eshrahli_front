@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types'
 
 const ContainerHeader = ({title}) => {
   return (
@@ -10,3 +11,7 @@ const ContainerHeader = ({title}) => {
 
 export default ContainerHeader;
 
+
+ContainerHeader.propTypes = {
+  title: PropTypes.string,
+};

@@ -8,19 +8,19 @@ export const loadCities = cities => ({
 });
 
 export const CreateCity = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("CREATE", "cities/create", params)
   };
 };
 
 export const UpdateCity= (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "cities/update", params)
   };
 };
 
 export const DeleteCity = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "cities/delete", params)
   };
 };
@@ -42,7 +42,7 @@ export const fetchCities = (params = {
 
 
 export const fetchOneCity = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "cities", params)
   };
 };

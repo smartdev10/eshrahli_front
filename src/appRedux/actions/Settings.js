@@ -8,19 +8,19 @@ export const loadSettings = settings => ({
 });
 
 export const CreateSetting = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("CREATE", "settings/create", params)
   };
 };
 
 export const UpdateSetting = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("UPDATE", "settings/update", params)
   };
 };
 
 export const DeleteSetting  = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("DELETE_MANY", "settings/delete", params)
   };
 };
@@ -30,14 +30,14 @@ export const fetchSettings = (params = {
   sort: { field: 'name' , order: 'ASC' },
   filter: {},
 }) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_LIST", "settings", params)
   }
 }
 
 
 export const fetchOneSetting = (params) => {
-  return dispatch => {
+  return () => {
     return dataProvider("GET_ONE", "settings", params)
   };
 };

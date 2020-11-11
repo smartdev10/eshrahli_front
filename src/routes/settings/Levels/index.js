@@ -8,7 +8,7 @@ import EditLevel from "components/level/EditLevel";
 import { connect } from "react-redux";
 import { fetchLevels , CreateLevel , UpdateLevel , DeleteLevel } from "../../../appRedux/actions/Levels";
 import { fetchSubjects } from "../../../appRedux/actions/Subjects";
-
+import PropTypes from "prop-types";
 import { FormattedMessage } from "react-intl";
 
 
@@ -34,7 +34,7 @@ class Levels extends React.Component {
       <div style={{ padding: 8 }}>
         <FormattedMessage id="columns.name" defaultMessage="name">
           {
-            placeholder => (
+            () => (
           <Input
             ref={node => {
               this.searchInput = node;
@@ -135,7 +135,7 @@ class Levels extends React.Component {
     this.setState({ selectedRowKeys });
   };
 
-  cancel = (e) => {
+  cancel = () => {
     this.setState({ selectedRowKeys:[]  });
   } 
 
@@ -215,3 +215,13 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, { fetchLevels , CreateLevel , UpdateLevel , DeleteLevel , fetchSubjects })(Levels)
 
+
+Levels.propTypes = {
+  fetchLevels: PropTypes.func,
+  fetchSubjects: PropTypes.func,
+  CreateLevel: PropTypes.func,
+  UpdateLevel: PropTypes.func,
+  DeleteLevel: PropTypes.func,
+  subjects: PropTypes.array,
+  levels: PropTypes.array,
+};

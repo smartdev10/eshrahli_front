@@ -3,6 +3,7 @@ import { Input, Modal  , Radio , Form , message  } from "antd";
 import { SaveFilled } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
+import PropTypes from "prop-types";
 
 const RadioGroup = Radio.Group;
 
@@ -100,7 +101,6 @@ class AddStudent extends React.Component {
             <div className="gx-form-group">
               <Form.Item label={<IntlMessages id="columns.gender"/>}>
                  <RadioGroup  onChange={(e)=> {
-                   console.log(e.target.value)
                    this.setState({gender: e.target.value})
                  }} options={options} />
               </Form.Item>
@@ -115,3 +115,10 @@ class AddStudent extends React.Component {
 
 
 export default AddStudent
+
+
+AddStudent.propTypes = {
+  onAddStudent: PropTypes.func,
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool,
+};

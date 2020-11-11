@@ -1,6 +1,7 @@
 import React , { useState , useEffect } from "react";
 import { Modal } from "antd";
 import IntlMessages from "util/IntlMessages";
+import PropTypes from "prop-types";
 
 const ShowMessage = ({ onToggleModal, open, message }) => {
   
@@ -30,3 +31,10 @@ const ShowMessage = ({ onToggleModal, open, message }) => {
 }
 
 export default React.memo(ShowMessage);
+
+
+ShowMessage.propTypes = {
+  onToggleModal: PropTypes.func,
+  open: PropTypes.bool,
+  message: PropTypes.object,
+};

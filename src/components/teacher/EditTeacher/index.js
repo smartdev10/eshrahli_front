@@ -1,5 +1,6 @@
 import React , { useState , useEffect } from "react";
 import { Input, Modal , Upload , Select , Form , Radio , Button } from "antd";
+import PropTypes from "prop-types";
 import { SaveFilled , UploadOutlined } from "@ant-design/icons";
 import IntlMessages from "util/IntlMessages";
 import { FormattedMessage } from "react-intl";
@@ -419,3 +420,10 @@ const EditTeacher = ({ onSaveTeacher, onToggleModal, open, teacher }) => {
 }
 
 export default React.memo(EditTeacher);
+
+EditTeacher.propTypes = {
+  teacher: PropTypes.object,
+  open:PropTypes.bool,
+  onToggleModal:PropTypes.func,
+  onSaveTeacher:PropTypes.func
+};
