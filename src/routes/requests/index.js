@@ -97,9 +97,9 @@ class Requests extends React.Component {
     }));
   }
  
-  componentDidMount(){
+  async componentDidMount(){
     this.setState({loading:true})
-    this.props.fetchRequests()
+    await this.props.fetchRequests()
     this.setState({loading:false})
   }
 
@@ -161,7 +161,8 @@ class Requests extends React.Component {
       <Row>
        <Col span={24}>
         <Card title={<h1><IntlMessages id="sidebar.Requests"/></h1>}>
-          <Button onClick={() => window.open('/export','_blank')} size="large" icon={<ExportOutlined />}  type="primary" >تصدير الطلبات</Button>
+          <Button onClick={() => window.open('/export/xlsx','_blank')} size="large" icon={<ExportOutlined />} color="green"  type="link" >تحميل الطلبات .xlsx</Button>
+          <Button onClick={() => window.open('/export','_blank')} size="large" icon={<ExportOutlined />} color="" type="link" >تحميل الطلبات .csv</Button>
           <div className="gx-mb-3">
             <span style={{marginLeft: 8}}>
               {hasSelected ? `تم تحديد ${selectedRowKeys.length.toString()} عناصر` : ''}
